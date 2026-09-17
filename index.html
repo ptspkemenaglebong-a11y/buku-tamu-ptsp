@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Buku Tamu Digital PTSP
+  </title>
+
+
+  <!-- =====================================================
+       GOOGLE FONT
+  ====================================================== -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
+
+  <style>
+
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+    body {
+
+      font-family: "Inter", sans-serif;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f0fdf4 0%,
+          #f8fafc 50%,
+          #ecfdf5 100%
+        );
+
+      min-height: 100vh;
+
+      color: #1f2937;
+
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .header {
+
+      background: #0f5132;
+
+      color: white;
+
+      padding: 18px 40px;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.12);
+
+    }
+
+
+    .header-inner {
+
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+    }
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+    }
+
+
+    .brand-logo {
+
+  width: 65px;
+
+  height: 65px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+
+}
+
+
+    .brand-text h1 {
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.3px;
+
+    }
+
+
+    .brand-text p {
+
+      font-size: 12px;
+
+      opacity: 0.8;
+
+      margin-top: 3px;
+
+    }
+
+
+    .status {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      font-size: 13px;
+
+      background:
+        rgba(255,255,255,0.1);
+
+      padding: 8px 14px;
+
+      border-radius: 30px;
+
+    }
+
+
+    .status-dot {
+
+      width: 8px;
+
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: #86efac;
+
+    }
+
+
+    /* =====================================================
+       MAIN
+    ====================================================== */
+
+    .main {
+
+      max-width: 1200px;
+
+      margin: 0 auto;
+
+      padding: 45px 25px 60px;
+
+    }
+
+
+    .page-title {
+
+      margin-bottom: 30px;
+
+    }
+
+
+    .page-title small {
+
+      color: #16a34a;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .page-title h2 {
+
+      font-size: 32px;
+
+      margin-top: 7px;
+
+      color: #12372a;
+
+    }
+
+
+    .page-title p {
+
+      color: #64748b;
+
+      margin-top: 8px;
+
+      font-size: 14px;
+
+    }
+
+
+    /* =====================================================
+       CARD
+    ====================================================== */
+
+    .card {
+
+      background: white;
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 10px 35px
+        rgba(15,81,50,0.08);
+
+      border:
+        1px solid #e5e7eb;
+
+      overflow: hidden;
+
+    }
+
+
+    .form-wrapper {
+
+      display: grid;
+
+      grid-template-columns:
+        0.8fr 1.2fr;
+
+    }
+
+
+    /* =====================================================
+       LEFT PANEL
+    ====================================================== */
+
+    .info-panel {
+
+      background:
+        linear-gradient(
+          145deg,
+          #0f5132,
+          #166534
+        );
+
+      color: white;
+
+      padding: 40px;
+
+      min-height: 600px;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+    .info-panel::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 250px;
+
+      height: 250px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.05);
+
+      right: -100px;
+
+      bottom: -80px;
+
+    }
+
+
+    .camera-placeholder {
+
+      height: 300px;
+
+      border:
+        2px dashed
+        rgba(255,255,255,0.4);
+
+      border-radius: 16px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      margin-bottom: 30px;
+
+      background:
+        rgba(0,0,0,0.08);
+
+    }
+
+
+    .camera-icon {
+
+      font-size: 55px;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    .camera-placeholder h3 {
+
+      font-size: 17px;
+
+    }
+
+
+    .camera-placeholder p {
+
+      font-size: 12px;
+
+      opacity: 0.75;
+
+      margin-top: 7px;
+
+    }
+
+    /* ============================================================
+       KAMERA / FOTO PENGUNJUNG
+    ============================================================ */
+
+    .camera-start {
+
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+    }
+
+
+    .camera-action {
+
+      margin-top: 18px;
+
+      padding: 12px 22px;
+
+      border: none;
+
+      border-radius: 9px;
+
+      background: white;
+
+      color: #075e36;
+
+      font-family: inherit;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+    }
+
+
+    .camera-action:hover {
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.15);
+
+    }
+
+
+    .photo-container {
+
+      width: 100%;
+
+      display: none;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+    }
+
+
+    #photoPreview {
+
+      width: 100%;
+
+      height: 260px;
+
+      object-fit: cover;
+
+      border-radius: 12px;
+
+      display: block;
+
+    }
+
+
+    .photo-status {
+
+      margin-top: 12px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      color: #bbf7d0;
+
+    }
+
+
+    .info-title {
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .info-description {
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      opacity: 0.8;
+
+    }
+
+
+    /* =====================================================
+       FORM PANEL
+    ====================================================== */
+
+    .form-panel {
+
+      padding: 40px;
+
+    }
+
+
+    .form-header {
+
+      margin-bottom: 28px;
+
+    }
+
+
+    .form-header h3 {
+
+      font-size: 21px;
+
+      color: #111827;
+
+    }
+
+
+    .form-header p {
+
+      font-size: 13px;
+
+      color: #64748b;
+
+      margin-top: 5px;
+
+    }
+
+
+    /* =====================================================
+       FORM GRID
+    ====================================================== */
+
+    .form-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 20px;
+
+    }
+
+
+    .form-group {
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+
+    .form-group.full {
+
+      grid-column: 1 / -1;
+
+    }
+
+
+    label {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      margin-bottom: 8px;
+
+      color: #374151;
+
+    }
+
+
+    .required {
+
+      color: #dc2626;
+
+    }
+
+
+    input,
+    select,
+    textarea {
+
+      width: 100%;
+
+      border:
+        1px solid #d1d5db;
+
+      border-radius: 10px;
+
+      padding: 13px 14px;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      outline: none;
+
+      background: #fff;
+
+      transition:
+        0.2s ease;
+
+    }
+
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+
+      border-color: #16a34a;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(22,163,74,0.1);
+
+    }
+
+
+    textarea {
+
+      resize: vertical;
+
+      min-height: 100px;
+
+    }
+
+
+    /* =====================================================
+       BUTTON
+    ====================================================== */
+
+    .button-area {
+
+      margin-top: 28px;
+
+    }
+
+
+    .btn-submit {
+
+      width: 100%;
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #15803d,
+          #16a34a
+        );
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        0.2s ease;
+
+      box-shadow:
+        0 6px 15px
+        rgba(22,163,74,0.2);
+
+    }
+
+
+    .btn-submit:hover {
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 8px 20px
+        rgba(22,163,74,0.25);
+
+    }
+
+
+    .btn-submit:disabled {
+
+      opacity: 0.6;
+
+      cursor: not-allowed;
+
+      transform: none;
+
+    }
+
+
+    /* =====================================================
+       LOADING
+    ====================================================== */
+
+    .loading {
+
+      display: none;
+
+      text-align: center;
+
+      padding: 15px;
+
+      margin-top: 15px;
+
+      background: #f0fdf4;
+
+      border-radius: 10px;
+
+      color: #166534;
+
+      font-size: 13px;
+
+    }
+
+
+    .loading.active {
+
+      display: block;
+
+    }
+
+
+    /* =====================================================
+       RESULT
+    ====================================================== */
+
+    .result {
+
+      display: none;
+
+      margin-top: 20px;
+
+      padding: 25px;
+
+      text-align: center;
+
+      border-radius: 14px;
+
+      background: #f0fdf4;
+
+      border:
+        1px solid #bbf7d0;
+
+    }
+
+
+    .result.active {
+
+      display: block;
+
+    }
+
+
+    .result-icon {
+
+      font-size: 40px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .result h3 {
+
+      color: #166534;
+
+      font-size: 18px;
+
+    }
+
+
+    .result p {
+
+      color: #64748b;
+
+      font-size: 13px;
+
+      margin-top: 5px;
+
+    }
+
+
+    .visit-id {
+
+      margin:
+        18px 0;
+
+      padding: 15px;
+
+      background: white;
+
+      border-radius: 10px;
+
+      font-size: 24px;
+
+      font-weight: 800;
+
+      color: #0f5132;
+
+      letter-spacing: 1px;
+
+      border:
+        1px solid #dcfce7;
+
+    }
+
+
+    .btn-new {
+
+      border: none;
+
+      background: #0f5132;
+
+      color: white;
+
+      border-radius: 9px;
+
+      padding: 12px 20px;
+
+      font-family: inherit;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .footer {
+
+      text-align: center;
+
+      color: #94a3b8;
+
+      font-size: 11px;
+
+      padding: 20px;
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (
+      max-width: 850px
+    ) {
+
+      .form-wrapper {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .info-panel {
+
+        min-height: auto;
+
+        padding: 30px;
+
+      }
+
+
+      .camera-placeholder {
+
+        height: 220px;
+
+      }
+
+
+      .form-panel {
+
+        padding: 30px 25px;
+
+      }
+
+    }
+
+
+    @media (
+      max-width: 600px
+    ) {
+
+      .header {
+
+        padding: 15px 20px;
+
+      }
+
+
+      .brand-text h1 {
+
+        font-size: 13px;
+
+      }
+
+
+      .brand-text p {
+
+        font-size: 10px;
+
+      }
+
+
+      .status {
+
+        display: none;
+
+      }
+
+
+      .main {
+
+        padding:
+          25px 15px 40px;
+
+      }
+
+
+      .page-title h2 {
+
+        font-size: 25px;
+
+      }
+
+
+      .form-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .form-group.full {
+
+        grid-column: auto;
+
+      }
+
+
+      .info-panel {
+
+        padding: 25px;
+
+      }
+
+    }
+
+
+  
+    /* ============================================================
+       WEBCAM PC / LAPTOP
+       ============================================================ */
+    .camera-live {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .camera-live video {
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #111;
+      transform: scaleX(-1);
+    }
+
+    .camera-live-actions {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .camera-cancel {
+      opacity: .9;
+    }
+</style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="header">
+
+    <div class="header-inner">
+
+
+      <div class="brand">
+
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Kementerian_Agama_new_logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail_unscaled&_=20180203035122"
+    class="brand-logo"
+    alt="Logo Kementerian Agama"
+  >
+
+  <div class="brand-text">
+
+    <h1>
+      KEMENTERIAN AGAMA REPUBLIK INDONESIA
+    </h1>
+
+    <h2>
+      KANTOR KEMENTERIAN AGAMA KABUPATEN LEBONG
+    </h2>
+
+    <p>
+      Pelayanan Terpadu Satu Pintu (PTSP)
+    </p>
+
+  </div>
+
+</div>
+
+
+      <div class="status">
+
+        <span class="status-dot"></span>
+
+        Sistem Aktif
+
+      </div>
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main">
+
+
+    <div class="page-title">
+
+      <small>
+        PTSP DIGITAL
+      </small>
+
+      <h2>
+        Buku Tamu Digital
+      </h2>
+
+      <p>
+        Pencatatan kunjungan tamu secara digital
+        pada PTSP Kementerian Agama Kabupaten Lebong.
+      </p>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         CARD
+    ==================================================== -->
+
+    <div class="card">
+
+
+      <div class="form-wrapper">
+
+
+        <!-- ===============================================
+             PANEL KIRI
+        ================================================= -->
+
+        <div class="info-panel">
+
+
+          <div class="camera-placeholder" id="cameraArea">
+
+            <!-- WEBCAM PC / LAPTOP -->
+            <div id="cameraLive" class="camera-live" style="display:none;">
+              <video id="cameraVideo" autoplay playsinline muted></video>
+              <canvas id="cameraCanvas" style="display:none;"></canvas>
+
+              <div class="camera-live-actions">
+                <button type="button" class="camera-action" onclick="ambilFotoWebcam()">
+                  📸 Jepret Foto
+                </button>
+                <button type="button" class="camera-action camera-cancel" onclick="tutupKameraWebcam()">
+                  ✕ Tutup Kamera
+                </button>
+              </div>
+            </div>
+
+
+            <!-- TAMPILAN AWAL -->
+            <div
+              id="cameraStart"
+              class="camera-start"
+            >
+
+              <div class="camera-icon">
+                📷
+              </div>
+
+              <h3>
+                Foto Pengunjung
+              </h3>
+
+              <p>
+                Ambil foto pengunjung menggunakan
+                kamera perangkat.
+              </p>
+
+              <button
+                type="button"
+                class="camera-action"
+                onclick="bukaKamera()"
+              >
+                📷 Ambil Foto
+              </button>
+
+            </div>
+
+
+            <!-- PREVIEW FOTO -->
+            <div
+              id="photoContainer"
+              class="photo-container"
+            >
+
+              <img
+                id="photoPreview"
+                alt="Foto Pengunjung"
+              >
+
+              <div class="photo-status">
+                ✓ Foto berhasil diambil
+              </div>
+
+              <button
+                type="button"
+                class="camera-action"
+                onclick="ambilUlangFoto()"
+              >
+                ↻ Ambil Ulang
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-title">
+
+            Selamat Datang
+
+          </div>
+
+
+          <div class="info-description">
+
+            Silakan masukkan data pengunjung
+            dengan lengkap dan benar.
+            Data kunjungan akan tersimpan
+            secara otomatis pada sistem
+            Buku Tamu Digital PTSP.
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ===============================================
+             PANEL KANAN
+        ================================================= -->
+
+        <div class="form-panel">
+
+
+          <div class="form-header">
+
+            <h3>
+              Data Kunjungan
+            </h3>
+
+            <p>
+              Lengkapi informasi pengunjung
+              pada formulir berikut.
+            </p>
+
+          </div>
+
+
+
+          <div class="form-grid">
+
+
+            <!-- NAMA -->
+
+            <div class="form-group full">
+
+              <label for="nama">
+
+                Nama Lengkap
+                <span class="required">*</span>
+
+              </label>
+
+              <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama lengkap pengunjung"
+                autocomplete="off"
+              >
+
+            </div>
+
+
+
+            <!-- ALAMAT -->
+
+            <div class="form-group">
+
+              <label for="alamatInstansi">
+
+                Alamat / Instansi
+
+              </label>
+
+              <input
+                type="text"
+                id="alamatInstansi"
+                placeholder="Contoh: MTsN 1 Lebong"
+                autocomplete="off"
+              >
+
+            </div>
+
+
+
+            <!-- HP -->
+
+            <div class="form-group">
+
+              <label for="noHp">
+
+                Nomor HP
+
+              </label>
+
+              <input
+                type="tel"
+                id="noHp"
+                placeholder="08xxxxxxxxxx"
+                autocomplete="off"
+              >
+
+            </div>
+
+
+
+            <!-- TUJUAN -->
+
+            <div class="form-group full">
+
+              <label for="tujuan">
+
+                Tujuan Layanan
+                <span class="required">*</span>
+
+              </label>
+
+              <select id="tujuan">
+
+                <option value="">
+
+                  Pilih tujuan layanan
+
+                </option>
+
+                <option value="Pendidikan Islam">
+
+                  Pendidikan Islam
+
+                </option>
+
+                <option value="Bimas Islam">
+
+                  Bimas Islam
+
+                </option>
+
+                <option value="Kepegawaian">
+
+                  Kepegawaian
+
+                </option>
+
+                <option value="Keuangan">
+
+                  Keuangan
+
+                </option>
+
+                <option value="Penyelenggara Katholik">
+
+                  Penyelenggara Katholik
+
+                </option>
+
+                <option value="Umum">
+
+                  Umum
+
+                </option>
+
+                <option value="Lainnya">
+
+                  Lainnya
+
+                </option>
+
+              </select>
+
+            </div>
+
+
+
+            <!-- DETAIL -->
+
+            <div class="form-group full">
+
+              <label for="detailKeperluan">
+
+                Detail Keperluan
+                <span class="required">*</span>
+
+              </label>
+
+              <textarea
+                id="detailKeperluan"
+                placeholder="Tuliskan keperluan atau tujuan kunjungan..."
+              ></textarea>
+
+            </div>
+
+
+
+            <!-- PETUGAS -->
+
+            <div class="form-group full">
+
+              <label for="petugas">
+
+                Petugas PTSP
+
+              </label>
+
+              <input
+                type="text"
+                id="petugas"
+                placeholder="Nama petugas yang melayani"
+                autocomplete="off"
+              >
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- =============================================
+               BUTTON
+          ============================================== -->
+
+          <div class="button-area">
+
+            <button
+              type="button"
+              class="btn-submit"
+              id="btnSimpan"
+              onclick="simpanData()"
+            >
+
+              ✓ &nbsp; SIMPAN KUNJUNGAN
+
+            </button>
+
+
+            <div
+              class="loading"
+              id="loading"
+            >
+
+              ⏳ &nbsp;
+              Menyimpan data kunjungan...
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- =============================================
+               HASIL
+          ============================================== -->
+
+          <div
+            class="result"
+            id="result"
+          >
+
+            <div class="result-icon">
+
+              ✓
+
+            </div>
+
+            <h3>
+
+              Kunjungan Berhasil Dicatat
+
+            </h3>
+
+            <p>
+
+              Data pengunjung telah berhasil
+              disimpan ke dalam sistem.
+
+            </p>
+
+
+            <div
+              class="visit-id"
+              id="visitId"
+            >
+
+            </div>
+
+
+            <button
+              class="btn-new"
+              onclick="formBaru()"
+            >
+
+              + Kunjungan Baru
+
+            </button>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="footer">
+
+    Sistem Buku Tamu Digital PTSP - Webcam
+    <br>
+
+    Kementerian Agama Kabupaten Lebong
+
+  </footer>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+
+    // =====================================================
+    // KONFIGURASI API
+    // =====================================================
+
+    // Ganti dengan URL DEPLOYMENT /exec Apps Script.
+    // Contoh:
+    // https://script.google.com/macros/s/DEPLOYMENT_ID/exec
+    const API_URL = "https://script.google.com/macros/s/AKfycbx1dxS2qLNLC-944Qbcr1cP8GCeEvVJ_dZOASEP50DLiePYDM3_GP1pb9OBwbBBsq8tWw/exec";
+
+    let fotoBase64 = "";
+    let cameraStream = null;
+
+
+    // =====================================================
+    // SIMPAN DATA
+    // =====================================================
+
+    async function simpanData() {
+
+      const nama = document.getElementById("nama").value.trim();
+      const alamat = document.getElementById("alamatInstansi").value.trim();
+      const noHp = document.getElementById("noHp").value.trim();
+      const tujuan = document.getElementById("tujuan").value.trim();
+      const detail = document.getElementById("detailKeperluan").value.trim();
+      const petugas = document.getElementById("petugas").value.trim();
+
+      if (!nama) {
+        alert("Nama lengkap wajib diisi.");
+        document.getElementById("nama").focus();
+        return;
+      }
+
+      if (!tujuan) {
+        alert("Silakan pilih tujuan layanan.");
+        document.getElementById("tujuan").focus();
+        return;
+      }
+
+      if (!detail) {
+        alert("Detail keperluan wajib diisi.");
+        document.getElementById("detailKeperluan").focus();
+        return;
+      }
+
+      if (!petugas) {
+        alert("Nama petugas wajib diisi.");
+        document.getElementById("petugas").focus();
+        return;
+      }
+
+      if (!API_URL || API_URL.includes("...")) {
+        alert("URL API Apps Script belum dikonfigurasi pada Index.html.");
+        return;
+      }
+
+      const button = document.getElementById("btnSimpan");
+      const loading = document.getElementById("loading");
+      button.disabled = true;
+      loading.classList.add("active");
+
+      const data = {
+        nama: nama,
+        alamat: alamat,
+        noHp: noHp,
+        tujuan: tujuan,
+        detail: detail,
+        petugas: petugas,
+        fotoBase64: fotoBase64
+      };
+
+      try {
+        /*
+         * Cross-origin form POST sengaja digunakan agar frontend HTTPS
+         * dapat mengirim data ke Apps Script tanpa membutuhkan CORS.
+         * Apps Script menerima payload melalui doPost(e).
+         */
+        await kirimKeAppsScript(data);
+
+        button.disabled = false;
+        loading.classList.remove("active");
+
+        document.getElementById("visitId").textContent = "Terkirim";
+        document.getElementById("result").classList.add("active");
+        document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+
+        alert("Data kunjungan telah dikirim ke sistem.");
+
+      } catch (error) {
+        button.disabled = false;
+        loading.classList.remove("active");
+        alert("Data gagal dikirim.\n\n" + error.message);
+      }
+    }
+
+
+    function kirimKeAppsScript(data) {
+      return new Promise(function(resolve, reject) {
+        const frameName = "apiSubmitFrame_" + Date.now();
+        const iframe = document.createElement("iframe");
+        iframe.name = frameName;
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = API_URL;
+        form.target = frameName;
+        form.style.display = "none";
+
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "payload";
+        input.value = JSON.stringify(data);
+        form.appendChild(input);
+        document.body.appendChild(form);
+
+        let selesai = false;
+
+        function cleanup() {
+          setTimeout(function() {
+            if (form.parentNode) form.parentNode.removeChild(form);
+            if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+          }, 1500);
+        }
+
+        iframe.onload = function() {
+          if (selesai) return;
+          selesai = true;
+          cleanup();
+          resolve();
+        };
+
+        iframe.onerror = function() {
+          if (selesai) return;
+          selesai = true;
+          cleanup();
+          reject(new Error("Koneksi ke server Apps Script gagal."));
+        };
+
+        try {
+          form.submit();
+          // Form POST lintas domain tidak memberi response body ke JavaScript.
+          // onload iframe digunakan sebagai tanda request selesai diterima browser.
+          setTimeout(function() {
+            if (selesai) return;
+            selesai = true;
+            cleanup();
+            resolve();
+          }, 4000);
+        } catch (error) {
+          selesai = true;
+          cleanup();
+          reject(error);
+        }
+      });
+    }
+
+
+    // =====================================================
+    // FORM BARU
+    // =====================================================
+
+    function formBaru() {
+      tutupKameraWebcam();
+
+      document.getElementById("nama").value = "";
+      document.getElementById("alamatInstansi").value = "";
+      document.getElementById("noHp").value = "";
+      document.getElementById("tujuan").value = "";
+      document.getElementById("detailKeperluan").value = "";
+      document.getElementById("petugas").value = "";
+
+      fotoBase64 = "";
+      document.getElementById("photoPreview").removeAttribute("src");
+      document.getElementById("photoContainer").style.display = "none";
+      document.getElementById("cameraLive").style.display = "none";
+      document.getElementById("cameraStart").style.display = "flex";
+      document.getElementById("result").classList.remove("active");
+
+      document.getElementById("nama").focus();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+
+    // =====================================================
+    // WEBCAM PC / LAPTOP
+    // =====================================================
+
+    async function bukaKamera() {
+      const cameraStart = document.getElementById("cameraStart");
+      const cameraLive = document.getElementById("cameraLive");
+      const video = document.getElementById("cameraVideo");
+
+      if (!window.isSecureContext) {
+        alert("Kamera membutuhkan halaman HTTPS. Pastikan Index V4 dibuka melalui HTTPS.");
+        return;
+      }
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Browser ini tidak mendukung akses webcam. Gunakan Google Chrome atau Microsoft Edge versi terbaru.");
+        return;
+      }
+
+      try {
+        tutupKameraWebcam();
+
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            facingMode: "user"
+          },
+          audio: false
+        });
+
+        video.srcObject = cameraStream;
+        video.muted = true;
+        video.playsInline = true;
+        await video.play();
+
+        cameraStart.style.display = "none";
+        document.getElementById("photoContainer").style.display = "none";
+        cameraLive.style.display = "flex";
+
+      } catch (error) {
+        console.error("Webcam error:", error);
+
+        let pesan = "Kamera tidak dapat diaktifkan.";
+
+        if (error.name === "NotAllowedError") {
+          pesan += "\n\nIzin kamera ditolak. Klik ikon kamera di address bar Chrome dan pilih Allow/Izinkan.";
+        } else if (error.name === "NotFoundError") {
+          pesan += "\n\nWebcam tidak ditemukan. Pastikan webcam terpasang.";
+        } else if (error.name === "NotReadableError") {
+          pesan += "\n\nWebcam sedang digunakan aplikasi lain. Tutup aplikasi seperti Camera, Zoom, atau Teams.";
+        } else if (error.name === "SecurityError") {
+          pesan += "\n\nBrowser memblokir akses kamera pada halaman ini.";
+        }
+
+        alert(pesan);
+        cameraStream = null;
+      }
+    }
+
+
+    // =====================================================
+    // JEPRET FOTO
+    // =====================================================
+
+    function ambilFotoWebcam() {
+      const video = document.getElementById("cameraVideo");
+      const canvas = document.getElementById("cameraCanvas");
+
+      if (!cameraStream) {
+        alert("Kamera belum aktif.");
+        return;
+      }
+
+      if (video.readyState < 2 || !video.videoWidth) {
+        alert("Kamera belum siap. Tunggu sebentar lalu coba lagi.");
+        return;
+      }
+
+      const maxWidth = 1200;
+      let width = video.videoWidth;
+      let height = video.videoHeight;
+
+      if (width > maxWidth) {
+        height = height * (maxWidth / width);
+        width = maxWidth;
+      }
+
+      canvas.width = Math.round(width);
+      canvas.height = Math.round(height);
+
+      const context = canvas.getContext("2d");
+      context.save();
+      context.translate(canvas.width, 0);
+      context.scale(-1, 1);
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      context.restore();
+
+      fotoBase64 = canvas.toDataURL("image/jpeg", 0.75);
+      tutupKameraWebcam();
+      tampilkanPreview();
+    }
+
+
+    // =====================================================
+    // MATIKAN WEBCAM
+    // =====================================================
+
+    function tutupKameraWebcam() {
+      const video = document.getElementById("cameraVideo");
+      const cameraLive = document.getElementById("cameraLive");
+
+      if (cameraStream) {
+        cameraStream.getTracks().forEach(function(track) {
+          track.stop();
+        });
+      }
+
+      cameraStream = null;
+
+      if (video) {
+        video.pause();
+        video.srcObject = null;
+      }
+
+      if (cameraLive) {
+        cameraLive.style.display = "none";
+      }
+    }
+
+
+    // =====================================================
+    // PREVIEW FOTO
+    // =====================================================
+
+    function tampilkanPreview() {
+      document.getElementById("photoPreview").src = fotoBase64;
+      document.getElementById("cameraStart").style.display = "none";
+      document.getElementById("cameraLive").style.display = "none";
+      document.getElementById("photoContainer").style.display = "flex";
+    }
+
+
+    function ambilUlangFoto() {
+      fotoBase64 = "";
+      tutupKameraWebcam();
+      document.getElementById("photoPreview").removeAttribute("src");
+      document.getElementById("photoContainer").style.display = "none";
+      document.getElementById("cameraStart").style.display = "flex";
+    }
+
+    </script>
+
+
+</body>
+
+</html>
