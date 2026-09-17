@@ -1007,6 +1007,16 @@
     .camera-cancel {
       opacity: .9;
     }
+
+    @media (max-width: 600px) {
+      .camera-live-actions {
+        gap: 8px;
+      }
+
+      .camera-live-actions .camera-action {
+        padding: 10px 14px;
+      }
+    }
 </style>
 
 </head>
@@ -1119,6 +1129,9 @@
               <div class="camera-live-actions">
                 <button type="button" class="camera-action" onclick="ambilFotoWebcam()">
                   📸 Jepret Foto
+                </button>
+                <button type="button" class="camera-action" onclick="gantiKamera()">
+                  🔄 Ganti Kamera
                 </button>
                 <button type="button" class="camera-action camera-cancel" onclick="tutupKameraWebcam()">
                   ✕ Tutup Kamera
@@ -1507,7 +1520,7 @@
 
   <footer class="footer">
 
-    Sistem Buku Tamu Digital PTSP - Webcam
+    Sistem Buku Tamu Digital PTSP V4.0
     <br>
 
     Kementerian Agama Kabupaten Lebong
@@ -1530,10 +1543,11 @@
     // Ganti dengan URL DEPLOYMENT /exec Apps Script.
     // Contoh:
     // https://script.google.com/macros/s/DEPLOYMENT_ID/exec
-    const API_URL = "https://script.google.com/macros/s/AKfycbx1dxS2qLNLC-944Qbcr1cP8GCeEvVJ_dZOASEP50DLiePYDM3_GP1pb9OBwbBBsq8tWw/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbw0F5x-cUKs3zrmxCnX.../exec";
 
     let fotoBase64 = "";
     let cameraStream = null;
+    let cameraFacingMode = "user";
 
 
     // =====================================================
@@ -1696,6 +1710,7 @@
       document.getElementById("petugas").value = "";
 
       fotoBase64 = "";
+      cameraFacingMode = "user";
       document.getElementById("photoPreview").removeAttribute("src");
       document.getElementById("photoContainer").style.display = "none";
       document.getElementById("cameraLive").style.display = "none";
@@ -1733,7 +1748,7 @@
           video: {
             width: { ideal: 1280 },
             height: { ideal: 720 },
-            facingMode: "user"
+            facingMode: { ideal: cameraFacingMode }
           },
           audio: false
         });
@@ -1755,9 +1770,11 @@
         if (error.name === "NotAllowedError") {
           pesan += "\n\nIzin kamera ditolak. Klik ikon kamera di address bar Chrome dan pilih Allow/Izinkan.";
         } else if (error.name === "NotFoundError") {
-          pesan += "\n\nWebcam tidak ditemukan. Pastikan webcam terpasang.";
+          pesan += "\n\nKamera tidak ditemukan.";
         } else if (error.name === "NotReadableError") {
-          pesan += "\n\nWebcam sedang digunakan aplikasi lain. Tutup aplikasi seperti Camera, Zoom, atau Teams.";
+          pesan += "\n\nKamera sedang digunakan aplikasi lain. Tutup aplikasi seperti Camera, Zoom, atau Teams.";
+        } else if (error.name === "OverconstrainedError") {
+          pesan += "\n\nKamera yang diminta tidak tersedia.";
         } else if (error.name === "SecurityError") {
           pesan += "\n\nBrowser memblokir akses kamera pada halaman ini.";
         }
@@ -1766,6 +1783,32 @@
         cameraStream = null;
       }
     }
+
+    // =====================================================
+    // GANTI KAMERA DEPAN / BELAKANG
+    // =====================================================
+
+    async function gantiKamera() {
+      if (!cameraStream) {
+        alert("Kamera belum aktif.");
+        return;
+      }
+
+      const modeSebelumnya = cameraFacingMode;
+
+      // user = kamera depan, environment = kamera belakang
+      cameraFacingMode =
+        cameraFacingMode === "environment"
+          ? "user"
+          : "environment";
+
+      try {
+        await bukaKamera();
+      } catch (error) {
+        cameraFacingMode = modeSebelumnya;
+      }
+    }
+
 
 
     // =====================================================
