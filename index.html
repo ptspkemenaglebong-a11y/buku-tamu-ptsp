@@ -16,7 +16,6 @@
     Buku Tamu Digital PTSP
   </title>
 
-  <!-- Favicon / Logo Tab Browser -->
   <link
     rel="icon"
     type="image/png"
@@ -1015,14 +1014,53 @@
       opacity: .9;
     }
 
-    @media (max-width: 600px) {
-      .camera-live-actions {
-        gap: 8px;
-      }
 
-      .camera-live-actions .camera-action {
-        padding: 10px 14px;
-      }
+    /* ============================================================
+       STATUS BUKU TAMU
+    ============================================================ */
+
+    .closed-message {
+      display: none;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px rgba(15,81,50,0.08);
+      padding: 60px 30px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .closed-message.active {
+      display: block;
+    }
+
+    .closed-icon {
+      font-size: 55px;
+      margin-bottom: 20px;
+    }
+
+    .closed-message h3 {
+      color: #12372a;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .closed-message p {
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .closed-status {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: #fef2f2;
+      color: #b91c1c;
+      font-size: 12px;
+      font-weight: 700;
     }
 </style>
 
@@ -1070,9 +1108,14 @@
 
       <div class="status">
 
-        <span class="status-dot"></span>
+        <span
+          class="status-dot"
+          id="statusDot"
+        ></span>
 
-        Sistem Aktif
+        <span id="systemStatusText">
+          Memeriksa status...
+        </span>
 
       </div>
 
@@ -1110,6 +1153,37 @@
 
 
     <!-- ===================================================
+         STATUS BUKU TAMU DITUTUP
+    ==================================================== -->
+
+    <div
+      id="closedMessage"
+      class="closed-message"
+    >
+
+      <div class="closed-icon">
+        🔒
+      </div>
+
+      <h3>
+        Buku Tamu Sedang Ditutup
+      </h3>
+
+      <p>
+        Saat ini layanan Buku Tamu Digital PTSP
+        sedang tidak tersedia.
+        <br>
+        Silakan mencoba kembali nanti.
+      </p>
+
+      <div class="closed-status">
+        BUKU TAMU TUTUP
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
          CARD
     ==================================================== -->
 
@@ -1136,9 +1210,6 @@
               <div class="camera-live-actions">
                 <button type="button" class="camera-action" onclick="ambilFotoWebcam()">
                   📸 Jepret Foto
-                </button>
-                <button type="button" class="camera-action" onclick="gantiKamera()">
-                  🔄 Ganti Kamera
                 </button>
                 <button type="button" class="camera-action camera-cancel" onclick="tutupKameraWebcam()">
                   ✕ Tutup Kamera
@@ -1527,7 +1598,7 @@
 
   <footer class="footer">
 
-    Sistem Buku Tamu Digital PTSP V4.0
+    Sistem Buku Tamu Digital PTSP - Webcam
     <br>
 
     Kementerian Agama Kabupaten Lebong
@@ -1550,11 +1621,127 @@
     // Ganti dengan URL DEPLOYMENT /exec Apps Script.
     // Contoh:
     // https://script.google.com/macros/s/DEPLOYMENT_ID/exec
-    const API_URL = 'https://script.google.com/macros/s/AKfycbwlxD_30dwLkRp8xxb-H0iANe0t2gd2mzDYfcLlzbt3W4baS8BWSG9G9VjtaiKBfBBV6Q/exec';
+    const API_URL = "https://script.google.com/macros/s/AKfycbwlxD_30dwLkRp8xxb-H0iANe0t2gd2mzDYfcLlzbt3W4baS8BWSG9G9VjtaiKBfBBV6Q/exec";
 
     let fotoBase64 = "";
     let cameraStream = null;
-    let cameraFacingMode = "user";
+    let statusBukuTamu = "BUKA";
+
+
+    // =====================================================
+    // STATUS BUKU TAMU
+    // =====================================================
+
+    async function cekStatusBukuTamu() {
+
+      try {
+
+        const response = await fetch(
+          API_URL +
+          "?action=status&_=" +
+          Date.now()
+        );
+
+        const hasil =
+          await response.json();
+
+        if (!hasil.success) {
+          throw new Error(
+            "Status Buku Tamu tidak dapat diperiksa."
+          );
+        }
+
+        statusBukuTamu =
+          hasil.status === "TUTUP"
+            ? "TUTUP"
+            : "BUKA";
+
+        tampilkanStatusBukuTamu();
+
+      } catch (error) {
+
+        console.error(
+          "Gagal membaca status Buku Tamu:",
+          error
+        );
+
+        statusBukuTamu = "BUKA";
+
+        tampilkanStatusBukuTamu();
+
+      }
+
+    }
+
+
+    function tampilkanStatusBukuTamu() {
+
+      const card =
+        document.querySelector(".card");
+
+      const closedMessage =
+        document.getElementById(
+          "closedMessage"
+        );
+
+      const statusText =
+        document.getElementById(
+          "systemStatusText"
+        );
+
+      const statusDot =
+        document.getElementById(
+          "statusDot"
+        );
+
+
+      if (statusBukuTamu === "TUTUP") {
+
+        if (card) {
+          card.style.display = "none";
+        }
+
+        if (closedMessage) {
+          closedMessage.classList.add(
+            "active"
+          );
+        }
+
+        if (statusText) {
+          statusText.textContent =
+            "Buku Tamu Ditutup";
+        }
+
+        if (statusDot) {
+          statusDot.style.background =
+            "#f87171";
+        }
+
+      } else {
+
+        if (card) {
+          card.style.display = "";
+        }
+
+        if (closedMessage) {
+          closedMessage.classList.remove(
+            "active"
+          );
+        }
+
+        if (statusText) {
+          statusText.textContent =
+            "Sistem Aktif";
+        }
+
+        if (statusDot) {
+          statusDot.style.background =
+            "#86efac";
+        }
+
+      }
+
+    }
 
 
     // =====================================================
@@ -1562,6 +1749,17 @@
     // =====================================================
 
     async function simpanData() {
+
+      if (statusBukuTamu === "TUTUP") {
+
+        alert(
+          "Buku Tamu sedang ditutup. " +
+          "Data kunjungan tidak dapat disimpan."
+        );
+
+        return;
+
+      }
 
       const nama = document.getElementById("nama").value.trim();
       const alamat = document.getElementById("alamatInstansi").value.trim();
@@ -1717,7 +1915,6 @@
       document.getElementById("petugas").value = "";
 
       fotoBase64 = "";
-      cameraFacingMode = "user";
       document.getElementById("photoPreview").removeAttribute("src");
       document.getElementById("photoContainer").style.display = "none";
       document.getElementById("cameraLive").style.display = "none";
@@ -1755,7 +1952,7 @@
           video: {
             width: { ideal: 1280 },
             height: { ideal: 720 },
-            facingMode: { ideal: cameraFacingMode }
+            facingMode: "user"
           },
           audio: false
         });
@@ -1777,11 +1974,9 @@
         if (error.name === "NotAllowedError") {
           pesan += "\n\nIzin kamera ditolak. Klik ikon kamera di address bar Chrome dan pilih Allow/Izinkan.";
         } else if (error.name === "NotFoundError") {
-          pesan += "\n\nKamera tidak ditemukan.";
+          pesan += "\n\nWebcam tidak ditemukan. Pastikan webcam terpasang.";
         } else if (error.name === "NotReadableError") {
-          pesan += "\n\nKamera sedang digunakan aplikasi lain. Tutup aplikasi seperti Camera, Zoom, atau Teams.";
-        } else if (error.name === "OverconstrainedError") {
-          pesan += "\n\nKamera yang diminta tidak tersedia.";
+          pesan += "\n\nWebcam sedang digunakan aplikasi lain. Tutup aplikasi seperti Camera, Zoom, atau Teams.";
         } else if (error.name === "SecurityError") {
           pesan += "\n\nBrowser memblokir akses kamera pada halaman ini.";
         }
@@ -1790,32 +1985,6 @@
         cameraStream = null;
       }
     }
-
-    // =====================================================
-    // GANTI KAMERA DEPAN / BELAKANG
-    // =====================================================
-
-    async function gantiKamera() {
-      if (!cameraStream) {
-        alert("Kamera belum aktif.");
-        return;
-      }
-
-      const modeSebelumnya = cameraFacingMode;
-
-      // user = kamera depan, environment = kamera belakang
-      cameraFacingMode =
-        cameraFacingMode === "environment"
-          ? "user"
-          : "environment";
-
-      try {
-        await bukaKamera();
-      } catch (error) {
-        cameraFacingMode = modeSebelumnya;
-      }
-    }
-
 
 
     // =====================================================
@@ -1907,6 +2076,20 @@
       document.getElementById("photoContainer").style.display = "none";
       document.getElementById("cameraStart").style.display = "flex";
     }
+
+
+    // =====================================================
+    // CEK STATUS SAAT HALAMAN DIBUKA
+    // =====================================================
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        cekStatusBukuTamu();
+
+      }
+    );
 
     </script>
 
