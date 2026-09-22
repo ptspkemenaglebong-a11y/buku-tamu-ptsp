@@ -2692,22 +2692,120 @@
           </h2>
 
           <p>
-            Pengaturan sistem akan dikembangkan pada tahap berikutnya.
+            Kelola status penggunaan Buku Tamu Digital PTSP.
           </p>
 
         </div>
 
 
+        <!-- STATUS BUKU TAMU -->
         <div class="card">
 
-          <div class="empty">
+          <div class="card-header">
 
-            ⚙️
+            <div>
+              <h3>
+                🔐 Status Buku Tamu
+              </h3>
 
-            <br><br>
+              <span>
+                Kontrol pengisian tamu
+              </span>
+            </div>
 
-            Modul pengaturan belum diaktifkan.
+          </div>
 
+
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              justify-content:space-between;
+              gap:20px;
+              padding:10px 0 4px;
+              flex-wrap:wrap;
+            "
+          >
+
+            <div>
+
+              <div
+                id="statusBukuTamuBadge"
+                style="
+                  display:inline-flex;
+                  align-items:center;
+                  gap:8px;
+                  padding:8px 14px;
+                  border-radius:20px;
+                  background:#e8f5ee;
+                  color:#087443;
+                  font-weight:700;
+                  font-size:13px;
+                "
+              >
+                <span id="statusBukuTamuDot">●</span>
+                <span id="statusBukuTamuText">Memuat...</span>
+              </div>
+
+              <p
+                id="statusBukuTamuKeterangan"
+                style="
+                  margin:10px 0 0;
+                  color:#7b8981;
+                  font-size:12px;
+                "
+              >
+                Memeriksa status Buku Tamu...
+              </p>
+
+            </div>
+
+
+            <div
+              id="statusBukuTamuAksi"
+              style="
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+              "
+            >
+
+              <button
+                id="btnTutupBukuTamu"
+                class="btn btn-secondary"
+                type="button"
+                onclick="ubahStatusBukuTamu('TUTUP')"
+                style="display:none;"
+              >
+                🔒 Tutup Buku Tamu
+              </button>
+
+              <button
+                id="btnBukaBukuTamu"
+                class="btn btn-primary"
+                type="button"
+                onclick="ubahStatusBukuTamu('BUKA')"
+                style="display:none;"
+              >
+                🔓 Buka Buku Tamu
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="statusBukuTamuUpdate"
+            style="
+              margin-top:16px;
+              padding-top:12px;
+              border-top:1px solid #edf1ee;
+              font-size:11px;
+              color:#8a968f;
+            "
+          >
+            Status dibaca dari konfigurasi sistem.
           </div>
 
         </div>
@@ -4931,13 +5029,13 @@
 
 
     const namaHariAnalisis = [
+      "Minggu",
       "Senin",
       "Selasa",
       "Rabu",
       "Kamis",
       "Jumat",
-      "Sabtu",
-      "Minggu"
+      "Sabtu"
     ];
 
 
@@ -5256,19 +5354,7 @@
         null;
 
 
-      const hariDariData =
-        Array.isArray(data.hari)
-          ? data.hari
-              .slice()
-              .sort(function(a, b) {
-                return Number(b.jumlah || 0) -
-                       Number(a.jumlah || 0);
-              })[0] || null
-          : null;
-
-
       const hari =
-        hariDariData ||
         ringkasan.hariTerbanyak ||
         null;
 
@@ -5763,45 +5849,27 @@
       }
 
 
-      // Pastikan urutan hari selalu Senin–Minggu,
-      // terlepas dari urutan data yang dikirim API.
-      const dataTerurut =
-        namaHariAnalisis.map(
-          function(namaHari) {
-
-            const item =
-              data.find(
-                function(row) {
-                  return row.nama === namaHari;
-                }
-              );
-
-            return {
-              nama: namaHari,
-              jumlah: item
-                ? Number(item.jumlah || 0)
-                : 0
-            };
-
-          }
-        );
-
-
       const labels =
-        dataTerurut.map(
+        data.map(
           function(item) {
 
-            return item.nama;
+            return (
+              item.nama ||
+              "-"
+            );
 
           }
         );
 
 
       const values =
-        dataTerurut.map(
+        data.map(
           function(item) {
 
-            return item.jumlah;
+            return Number(
+              item.jumlah ||
+              0
+            );
 
           }
         );
@@ -6170,6 +6238,249 @@
 
               }
 
+            },
+            0
+          );
+
+        }
+      );
+
+    }
+
+
+    // =====================================================
+    // PENGATURAN - STATUS BUKU TAMU
+    // =====================================================
+
+    async function loadPengaturan() {
+
+      const textStatus =
+        document.getElementById(
+          "statusBukuTamuText"
+        );
+
+      const keterangan =
+        document.getElementById(
+          "statusBukuTamuKeterangan"
+        );
+
+      const badge =
+        document.getElementById(
+          "statusBukuTamuBadge"
+        );
+
+      const dot =
+        document.getElementById(
+          "statusBukuTamuDot"
+        );
+
+      const btnTutup =
+        document.getElementById(
+          "btnTutupBukuTamu"
+        );
+
+      const btnBuka =
+        document.getElementById(
+          "btnBukaBukuTamu"
+        );
+
+      const update =
+        document.getElementById(
+          "statusBukuTamuUpdate"
+        );
+
+      if (!textStatus) {
+        return;
+      }
+
+      textStatus.textContent = "Memuat...";
+      keterangan.textContent =
+        "Memeriksa status Buku Tamu...";
+      btnTutup.style.display = "none";
+      btnBuka.style.display = "none";
+
+      try {
+
+        const response = await fetch(
+          API_URL +
+          "?action=status&t=" +
+          Date.now()
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Server mengembalikan status " +
+            response.status
+          );
+        }
+
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(
+            data.message ||
+            "Status Buku Tamu gagal dimuat."
+          );
+        }
+
+        const status =
+          String(data.status || "BUKA")
+            .trim()
+            .toUpperCase();
+
+        if (status === "TUTUP") {
+
+          textStatus.textContent = "TUTUP";
+          dot.textContent = "●";
+          badge.style.background = "#fdecec";
+          badge.style.color = "#b42318";
+
+          keterangan.textContent =
+            "Buku Tamu sedang ditutup. Form pengisian tidak dapat digunakan.";
+
+          btnBuka.style.display = "inline-flex";
+
+        } else {
+
+          textStatus.textContent = "BUKA";
+          dot.textContent = "●";
+          badge.style.background = "#e8f5ee";
+          badge.style.color = "#087443";
+
+          keterangan.textContent =
+            "Buku Tamu sedang dapat digunakan oleh petugas PTSP.";
+
+          btnTutup.style.display = "inline-flex";
+
+        }
+
+        update.textContent =
+          "Status terakhir diperbarui • " +
+          new Date().toLocaleTimeString(
+            "id-ID",
+            {
+              hour: "2-digit",
+              minute: "2-digit"
+            }
+          );
+
+      } catch (error) {
+
+        console.error(
+          "Status Buku Tamu:",
+          error
+        );
+
+        textStatus.textContent =
+          "GAGAL MEMUAT";
+
+        badge.style.background = "#fff4e5";
+        badge.style.color = "#b54708";
+
+        keterangan.textContent =
+          "Status Buku Tamu belum dapat diperiksa.";
+
+        update.textContent =
+          "Gagal memuat status: " +
+          error.message;
+
+      }
+
+    }
+
+
+    async function ubahStatusBukuTamu(statusBaru) {
+
+      const status =
+        String(statusBaru || "")
+          .trim()
+          .toUpperCase();
+
+      if (status !== "BUKA" && status !== "TUTUP") {
+        return;
+      }
+
+      const pesan =
+        status === "TUTUP"
+          ? "Apakah Anda yakin ingin menutup Buku Tamu?"
+          : "Apakah Anda yakin ingin membuka kembali Buku Tamu?";
+
+      if (!confirm(pesan)) {
+        return;
+      }
+
+      const update =
+        document.getElementById(
+          "statusBukuTamuUpdate"
+        );
+
+      update.textContent =
+        "Menyimpan perubahan status...";
+
+      try {
+
+        const url =
+          API_URL +
+          "?action=setStatus" +
+          "&status=" +
+          encodeURIComponent(status) +
+          "&t=" +
+          Date.now();
+
+        const response =
+          await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(
+            "Server mengembalikan status " +
+            response.status
+          );
+        }
+
+        const data =
+          await response.json();
+
+        if (!data.success) {
+          throw new Error(
+            data.message ||
+            "Status gagal diubah."
+          );
+        }
+
+        await loadPengaturan();
+
+      } catch (error) {
+
+        console.error(
+          "Ubah Status Buku Tamu:",
+          error
+        );
+
+        update.textContent =
+          "Gagal mengubah status: " +
+          error.message;
+
+      }
+
+    }
+
+
+    // Buka Pengaturan tanpa mengubah
+    // mekanisme navigasi yang sudah ada.
+    const menuPengaturan =
+      document.querySelector(
+        '.menu-item[data-page="pengaturan"]'
+      );
+
+    if (menuPengaturan) {
+
+      menuPengaturan.addEventListener(
+        "click",
+        function() {
+
+          setTimeout(
+            function() {
+              loadPengaturan();
             },
             0
           );
