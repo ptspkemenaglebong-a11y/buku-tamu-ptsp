@@ -14,21 +14,11 @@
     Dashboard Admin - Buku Tamu Digital
   </title>
 
-
-  <!-- =====================================================
-       FAVICON
-  ====================================================== -->
-
   <link
     rel="icon"
     type="image/png"
     href="https://upload.wikimedia.org/wikipedia/commons/9/9a/Kementerian_Agama_new_logo.png"
   >
-
-
-  <!-- =====================================================
-       FONT
-  ====================================================== -->
 
   <link
     rel="preconnect"
@@ -46,19 +36,8 @@
     rel="stylesheet"
   >
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- =====================================================
-       CHART JS
-  ====================================================== -->
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/chart.js"
-  ></script>
-
-
-  <!-- =====================================================
-       CSS
-  ====================================================== -->
 
   <style>
 
@@ -175,10 +154,6 @@
     }
 
 
-    /* =====================================================
-       MENU
-    ====================================================== */
-
     .menu {
 
       margin-top: 25px;
@@ -196,7 +171,8 @@
 
       opacity: 0.6;
 
-      padding: 0 12px;
+      padding:
+        0 12px;
 
       margin-bottom: 8px;
 
@@ -204,6 +180,8 @@
 
 
     .menu-item {
+
+      width: 100%;
 
       display: flex;
 
@@ -226,6 +204,14 @@
       font-weight: 500;
 
       transition: 0.2s;
+
+      cursor: pointer;
+
+      border: none;
+
+      background: transparent;
+
+      text-align: left;
 
     }
 
@@ -288,7 +274,8 @@
 
       justify-content: space-between;
 
-      padding: 0 30px;
+      padding:
+        0 30px;
 
       border-bottom:
         1px solid
@@ -365,10 +352,6 @@
     }
 
 
-    /* =====================================================
-       MOBILE MENU
-    ====================================================== */
-
     .mobile-menu {
 
       display: none;
@@ -403,14 +386,27 @@
     .content {
 
       padding:
-        28px
-        30px;
+        28px 30px;
+
+    }
+
+
+    .page-section {
+
+      display: none;
+
+    }
+
+
+    .page-section.active {
+
+      display: block;
 
     }
 
 
     /* =====================================================
-       DASHBOARD STATUS
+       STATUS
     ====================================================== */
 
     .dashboard-status {
@@ -450,8 +446,7 @@
         #dce7e0;
 
       padding:
-        8px
-        13px;
+        8px 13px;
 
       border-radius: 8px;
 
@@ -461,23 +456,12 @@
 
       font-weight: 600;
 
-      transition: 0.2s;
-
     }
 
 
     .refresh-button:hover {
 
       background: #eaf5ee;
-
-    }
-
-
-    .refresh-button:disabled {
-
-      opacity: 0.6;
-
-      cursor: wait;
 
     }
 
@@ -491,10 +475,7 @@
       display: grid;
 
       grid-template-columns:
-        repeat(
-          4,
-          minmax(0, 1fr)
-        );
+        repeat(4, minmax(0, 1fr));
 
       gap: 18px;
 
@@ -571,7 +552,7 @@
 
 
     /* =====================================================
-       GRID
+       CARD
     ====================================================== */
 
     .dashboard-grid {
@@ -652,7 +633,7 @@
 
 
     /* =====================================================
-       SERVICE LIST
+       TUJUAN
     ====================================================== */
 
     .service-list {
@@ -717,8 +698,6 @@
 
       border-radius: 20px;
 
-      transition: width 0.5s;
-
     }
 
 
@@ -733,19 +712,6 @@
       font-weight: 600;
 
       color: #526058;
-
-    }
-
-
-    .empty-message {
-
-      font-size: 12px;
-
-      color: #8a968f;
-
-      text-align: center;
-
-      padding: 20px 5px;
 
     }
 
@@ -774,8 +740,7 @@
       justify-content: space-between;
 
       padding:
-        9px
-        10px;
+        9px 10px;
 
       background: #f7faf8;
 
@@ -805,12 +770,201 @@
 
 
     /* =====================================================
+       DATA KUNJUNGAN
+    ====================================================== */
+
+    .section-title {
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .section-title h2 {
+
+      color: #164c31;
+
+      font-size: 20px;
+
+    }
+
+
+    .section-title p {
+
+      color: #7b8981;
+
+      font-size: 12px;
+
+      margin-top: 5px;
+
+    }
+
+
+    .filter-card {
+
+      margin-bottom: 20px;
+
+    }
+
+
+    .filter-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        2fr
+        1fr
+        1fr
+        1fr
+        1fr;
+
+      gap: 12px;
+
+    }
+
+
+    .form-group {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6px;
+
+    }
+
+
+    .form-group label {
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      color: #68756e;
+
+    }
+
+
+    .form-control {
+
+      width: 100%;
+
+      height: 38px;
+
+      border:
+        1px solid
+        #dce5df;
+
+      border-radius: 8px;
+
+      padding:
+        0 10px;
+
+      background: white;
+
+      color: #35423a;
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      outline: none;
+
+    }
+
+
+    .form-control:focus {
+
+      border-color:
+        #087443;
+
+      box-shadow:
+        0 0 0 2px
+        rgba(8,116,67,0.08);
+
+    }
+
+
+    .filter-actions {
+
+      display: flex;
+
+      align-items: end;
+
+    }
+
+
+    .btn {
+
+      height: 38px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      padding:
+        0 14px;
+
+      cursor: pointer;
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+    }
+
+
+    .btn-primary {
+
+      background: #087443;
+
+      color: white;
+
+    }
+
+
+    .btn-primary:hover {
+
+      background: #075f38;
+
+    }
+
+
+    .btn-secondary {
+
+      background: #edf4ef;
+
+      color: #087443;
+
+    }
+
+
+    .result-info {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 12px;
+
+      font-size: 11px;
+
+      color: #7b8981;
+
+    }
+
+
+    /* =====================================================
        TABLE
     ====================================================== */
 
     .table-card {
 
-      margin-bottom: 20px;
+      overflow: hidden;
 
     }
 
@@ -828,7 +982,7 @@
 
       border-collapse: collapse;
 
-      min-width: 750px;
+      min-width: 900px;
 
     }
 
@@ -841,7 +995,7 @@
 
       color: #65736b;
 
-      font-size: 11px;
+      font-size: 10px;
 
       font-weight: 600;
 
@@ -857,7 +1011,6 @@
     td {
 
       padding:
-        13px
         12px;
 
       font-size: 11px;
@@ -867,6 +1020,8 @@
       border-bottom:
         1px solid
         #edf1ee;
+
+      vertical-align: middle;
 
     }
 
@@ -894,8 +1049,7 @@
       display: inline-block;
 
       padding:
-        5px
-        8px;
+        5px 8px;
 
       border-radius: 20px;
 
@@ -903,7 +1057,7 @@
 
       color: #087443;
 
-      font-size: 10px;
+      font-size: 9px;
 
       font-weight: 600;
 
@@ -912,8 +1066,353 @@
     }
 
 
+    .btn-detail {
+
+      border: none;
+
+      background: #e8f5ed;
+
+      color: #087443;
+
+      width: 30px;
+      height: 30px;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+    }
+
+
+    .btn-detail:hover {
+
+      background: #087443;
+
+      color: white;
+
+    }
+
+
     /* =====================================================
-       LOADING
+       PAGINATION
+    ====================================================== */
+
+    .pagination {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 5px;
+
+      margin-top: 18px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .page-btn {
+
+      min-width: 32px;
+      height: 32px;
+
+      border:
+        1px solid
+        #dce5df;
+
+      background: white;
+
+      color: #526058;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-size: 10px;
+
+    }
+
+
+    .page-btn:hover {
+
+      background: #edf5ef;
+
+    }
+
+
+    .page-btn.active {
+
+      background: #087443;
+
+      border-color: #087443;
+
+      color: white;
+
+    }
+
+
+    .page-btn:disabled {
+
+      opacity: 0.4;
+
+      cursor: not-allowed;
+
+    }
+
+
+    /* =====================================================
+       MODAL
+    ====================================================== */
+
+    .modal-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(0,0,0,0.5);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 2000;
+
+      padding: 20px;
+
+    }
+
+
+    .modal-overlay.show {
+
+      display: flex;
+
+    }
+
+
+    .modal {
+
+      background: white;
+
+      width: 100%;
+
+      max-width: 850px;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0 15px 50px
+        rgba(0,0,0,0.2);
+
+    }
+
+
+    .modal-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding:
+        18px 22px;
+
+      border-bottom:
+        1px solid
+        #e8edea;
+
+    }
+
+
+    .modal-header h3 {
+
+      color: #164c31;
+
+      font-size: 16px;
+
+    }
+
+
+    .modal-close {
+
+      border: none;
+
+      background: #edf4ef;
+
+      color: #087443;
+
+      width: 32px;
+      height: 32px;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-size: 17px;
+
+    }
+
+
+    .modal-body {
+
+      padding: 22px;
+
+    }
+
+
+    .detail-layout {
+
+      display: grid;
+
+      grid-template-columns:
+        1.5fr 1fr;
+
+      gap: 25px;
+
+    }
+
+
+    .detail-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+    }
+
+
+    .detail-row {
+
+      display: grid;
+
+      grid-template-columns:
+        125px 1fr;
+
+      gap: 10px;
+
+      padding-bottom: 10px;
+
+      border-bottom:
+        1px solid
+        #edf1ee;
+
+    }
+
+
+    .detail-label {
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      color: #87928c;
+
+    }
+
+
+    .detail-value {
+
+      font-size: 11px;
+
+      color: #35423a;
+
+      word-break: break-word;
+
+    }
+
+
+    .photo-box {
+
+      border:
+        1px solid
+        #e2e9e4;
+
+      border-radius: 12px;
+
+      min-height: 300px;
+
+      background: #f7faf8;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      overflow: hidden;
+
+    }
+
+
+    .photo-box img {
+
+      max-width: 100%;
+
+      max-height: 360px;
+
+      object-fit: contain;
+
+      display: block;
+
+    }
+
+
+    .photo-empty {
+
+      color: #8a968f;
+
+      font-size: 11px;
+
+      text-align: center;
+
+      padding: 20px;
+
+    }
+
+
+    .photo-link {
+
+      display: inline-block;
+
+      margin-top: 12px;
+
+      color: #087443;
+
+      font-size: 10px;
+
+      text-decoration: none;
+
+      font-weight: 600;
+
+    }
+
+
+    .photo-link:hover {
+
+      text-decoration: underline;
+
+    }
+
+
+    /* =====================================================
+       EMPTY / LOADING
     ====================================================== */
 
     .loading {
@@ -933,8 +1432,8 @@
 
       display: inline-block;
 
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
 
       border:
         2px solid
@@ -966,6 +1465,19 @@
     }
 
 
+    .empty {
+
+      text-align: center;
+
+      padding: 35px;
+
+      color: #8a968f;
+
+      font-size: 12px;
+
+    }
+
+
     /* =====================================================
        FOOTER
     ====================================================== */
@@ -979,9 +1491,7 @@
       color: #8b968f;
 
       padding:
-        10px
-        0
-        25px;
+        10px 0 25px;
 
     }
 
@@ -995,18 +1505,22 @@
       .stats {
 
         grid-template-columns:
-          repeat(
-            2,
-            1fr
-          );
+          repeat(2, 1fr);
 
       }
 
 
       .dashboard-grid {
 
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .filter-grid {
+
         grid-template-columns:
-          1fr;
+          repeat(2, 1fr);
 
       }
 
@@ -1048,8 +1562,7 @@
       .topbar {
 
         padding:
-          0
-          15px;
+          0 15px;
 
       }
 
@@ -1057,16 +1570,14 @@
       .content {
 
         padding:
-          20px
-          15px;
+          20px 15px;
 
       }
 
 
       .stats {
 
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
 
       }
 
@@ -1092,16 +1603,23 @@
       }
 
 
-      .dashboard-status {
+      .filter-grid {
 
-        align-items: flex-start;
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .detail-layout {
+
+        grid-template-columns: 1fr;
 
       }
 
 
       .service-name {
 
-        width: 105px;
+        width: 100px;
 
       }
 
@@ -1123,7 +1641,6 @@
     class="sidebar"
     id="sidebar"
   >
-
 
     <div class="brand">
 
@@ -1154,9 +1671,9 @@
       </div>
 
 
-      <a
-        href="#"
+      <button
         class="menu-item active"
+        data-page="dashboard"
       >
 
         <span class="menu-icon">
@@ -1167,13 +1684,12 @@
           Dashboard
         </span>
 
-      </a>
+      </button>
 
 
-      <a
-        href="#"
+      <button
         class="menu-item"
-        onclick="return false;"
+        data-page="kunjungan"
       >
 
         <span class="menu-icon">
@@ -1184,13 +1700,12 @@
           Data Kunjungan
         </span>
 
-      </a>
+      </button>
 
 
-      <a
-        href="#"
+      <button
         class="menu-item"
-        onclick="return false;"
+        data-page="analisis"
       >
 
         <span class="menu-icon">
@@ -1201,7 +1716,7 @@
           Analisis
         </span>
 
-      </a>
+      </button>
 
 
       <div
@@ -1212,10 +1727,9 @@
       </div>
 
 
-      <a
-        href="#"
+      <button
         class="menu-item"
-        onclick="return false;"
+        data-page="pengaturan"
       >
 
         <span class="menu-icon">
@@ -1226,7 +1740,7 @@
           Pengaturan
         </span>
 
-      </a>
+      </button>
 
 
       <a
@@ -1257,20 +1771,13 @@
   <main class="main">
 
 
-    <!-- ===================================================
-         TOPBAR
-    ==================================================== -->
-
     <header class="topbar">
 
-
       <div class="topbar-left">
-
 
         <button
           class="mobile-menu"
           onclick="toggleSidebar()"
-          aria-label="Buka menu"
         >
           ☰
         </button>
@@ -1278,7 +1785,7 @@
 
         <div class="page-title">
 
-          <h1>
+          <h1 id="pageTitle">
             Dashboard Admin
           </h1>
 
@@ -1303,208 +1810,217 @@
 
       </div>
 
-
     </header>
 
 
-
-    <!-- ===================================================
-         CONTENT
-    ==================================================== -->
 
     <section class="content">
 
 
       <!-- =================================================
-           STATUS / REFRESH
+           DASHBOARD
       ================================================== -->
 
-      <div class="dashboard-status">
-
-        <div
-          class="status-text"
-          id="statusText"
-        >
-          Memuat data dashboard...
-        </div>
+      <div
+        class="page-section active"
+        id="page-dashboard"
+      >
 
 
-        <button
-          class="refresh-button"
-          id="refreshButton"
-          onclick="loadDashboard()"
-        >
-          ↻ Refresh Data
-        </button>
+        <div class="dashboard-status">
 
-      </div>
-
-
-
-      <!-- =================================================
-           STATISTICS
-      ================================================== -->
-
-      <div class="stats">
-
-
-        <!-- HARI INI -->
-
-        <div class="stat-card">
-
-          <div class="stat-info">
-
-            <p>
-              Kunjungan Hari Ini
-            </p>
-
-            <h2 id="statHariIni">
-              0
-            </h2>
-
+          <div
+            class="status-text"
+            id="dashboardStatus"
+          >
+            Memuat data dashboard...
           </div>
 
-          <div class="stat-icon">
-            👥
-          </div>
+
+          <button
+            class="refresh-button"
+            onclick="loadDashboard()"
+          >
+            ↻ Refresh Data
+          </button>
 
         </div>
 
 
-        <!-- BULAN -->
+        <div class="stats">
 
-        <div class="stat-card">
 
-          <div class="stat-info">
+          <div class="stat-card">
 
-            <p>
-              Kunjungan Bulan Ini
-            </p>
+            <div class="stat-info">
 
-            <h2 id="statBulanIni">
-              0
-            </h2>
+              <p>
+                Kunjungan Hari Ini
+              </p>
+
+              <h2 id="statHariIni">
+                0
+              </h2>
+
+            </div>
+
+            <div class="stat-icon">
+              👥
+            </div>
 
           </div>
 
-          <div class="stat-icon">
-            📅
+
+          <div class="stat-card">
+
+            <div class="stat-info">
+
+              <p>
+                Kunjungan Bulan Ini
+              </p>
+
+              <h2 id="statBulanIni">
+                0
+              </h2>
+
+            </div>
+
+            <div class="stat-icon">
+              📅
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-info">
+
+              <p>
+                Kunjungan Tahun Ini
+              </p>
+
+              <h2 id="statTahunIni">
+                0
+              </h2>
+
+            </div>
+
+            <div class="stat-icon">
+              📊
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-info">
+
+              <p>
+                Total Kunjungan
+              </p>
+
+              <h2 id="statTotal">
+                0
+              </h2>
+
+            </div>
+
+            <div class="stat-icon">
+              📋
+            </div>
+
           </div>
 
         </div>
 
 
-        <!-- TAHUN -->
 
-        <div class="stat-card">
+        <div class="dashboard-grid">
 
-          <div class="stat-info">
 
-            <p>
-              Kunjungan Tahun Ini
-            </p>
+          <div class="card">
 
-            <h2 id="statTahunIni">
-              0
-            </h2>
+            <div class="card-header">
+
+              <h3>
+                Tren Kunjungan
+              </h3>
+
+              <span id="tahunGrafik">
+                Tahun berjalan
+              </span>
+
+            </div>
+
+
+            <div class="chart-container">
+
+              <canvas
+                id="trendChart"
+              ></canvas>
+
+            </div>
 
           </div>
 
-          <div class="stat-icon">
-            📊
+
+
+          <div class="card">
+
+            <div class="card-header">
+
+              <h3>
+                Berdasarkan Tujuan
+              </h3>
+
+              <span>
+                Total
+              </span>
+
+            </div>
+
+
+            <div
+              class="service-list"
+              id="serviceList"
+            >
+
+              <div class="loading">
+
+                <span class="spinner"></span>
+
+                Memuat data...
+
+              </div>
+
+            </div>
+
           </div>
 
         </div>
 
 
-        <!-- TOTAL -->
-
-        <div class="stat-card">
-
-          <div class="stat-info">
-
-            <p>
-              Total Kunjungan
-            </p>
-
-            <h2 id="statTotal">
-              0
-            </h2>
-
-          </div>
-
-          <div class="stat-icon">
-            📋
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =================================================
-           CHART GRID
-      ================================================== -->
-
-      <div class="dashboard-grid">
-
-
-        <!-- =================================================
-             TREND
-        ================================================== -->
 
         <div class="card">
-
 
           <div class="card-header">
 
             <h3>
-              Tren Kunjungan
-            </h3>
-
-            <span id="tahunGrafik">
-              Tahun berjalan
-            </span>
-
-          </div>
-
-
-          <div class="chart-container">
-
-            <canvas
-              id="trendChart"
-            ></canvas>
-
-          </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             TUJUAN
-        ================================================== -->
-
-        <div class="card">
-
-
-          <div class="card-header">
-
-            <h3>
-              Berdasarkan Tujuan
+              Kunjungan Berdasarkan Petugas
             </h3>
 
             <span>
-              Total
+              Rekap keseluruhan
             </span>
 
           </div>
 
 
           <div
-            class="service-list"
-            id="serviceList"
+            class="petugas-list"
+            id="petugasList"
           >
 
             <div class="loading">
@@ -1519,40 +2035,299 @@
 
         </div>
 
+
       </div>
 
 
 
       <!-- =================================================
-           PETUGAS
+           DATA KUNJUNGAN
       ================================================== -->
 
-      <div class="card table-card">
+      <div
+        class="page-section"
+        id="page-kunjungan"
+      >
 
 
-        <div class="card-header">
+        <div class="section-title">
 
-          <h3>
-            Kunjungan Berdasarkan Petugas
-          </h3>
+          <h2>
+            Data Kunjungan
+          </h2>
 
-          <span>
-            Rekap keseluruhan
-          </span>
+          <p>
+            Data kunjungan yang tersimpan pada database V2.
+          </p>
 
         </div>
 
 
-        <div
-          class="petugas-list"
-          id="petugasList"
-        >
+        <div class="card filter-card">
 
-          <div class="loading">
 
-            <span class="spinner"></span>
+          <div class="filter-grid">
 
-            Memuat data...
+
+            <div class="form-group">
+
+              <label>
+                Pencarian
+              </label>
+
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Nama, ID, instansi, No. HP..."
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Tujuan
+              </label>
+
+              <select
+                id="filterTujuan"
+                class="form-control"
+              >
+
+                <option value="">
+                  Semua Tujuan
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Petugas
+              </label>
+
+              <select
+                id="filterPetugas"
+                class="form-control"
+              >
+
+                <option value="">
+                  Semua Petugas
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Dari Tanggal
+              </label>
+
+              <input
+                type="date"
+                id="filterDari"
+                class="form-control"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Sampai Tanggal
+              </label>
+
+              <input
+                type="date"
+                id="filterSampai"
+                class="form-control"
+              >
+
+            </div>
+
+
+          </div>
+
+
+          <div
+            style="
+              display:flex;
+              justify-content:flex-end;
+              gap:8px;
+              margin-top:12px;
+            "
+          >
+
+            <button
+              class="btn btn-secondary"
+              onclick="resetFilter()"
+            >
+              Reset
+            </button>
+
+
+            <button
+              class="btn btn-primary"
+              onclick="terapkanFilter()"
+            >
+              🔎 Terapkan Filter
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="card table-card">
+
+
+          <div class="result-info">
+
+            <span id="resultInfo">
+              Memuat data...
+            </span>
+
+            <button
+              class="btn btn-secondary"
+              onclick="loadKunjungan(true)"
+            >
+              ↻ Refresh
+            </button>
+
+          </div>
+
+
+          <div class="table-wrapper">
+
+
+            <table>
+
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    ID Kunjungan
+                  </th>
+
+                  <th>
+                    Waktu
+                  </th>
+
+                  <th>
+                    Nama
+                  </th>
+
+                  <th>
+                    Alamat / Instansi
+                  </th>
+
+                  <th>
+                    No. HP
+                  </th>
+
+                  <th>
+                    Tujuan
+                  </th>
+
+                  <th>
+                    Petugas
+                  </th>
+
+                  <th>
+                    Detail
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody
+                id="tabelKunjungan"
+              >
+
+                <tr>
+
+                  <td
+                    colspan="8"
+                    class="loading"
+                  >
+
+                    <span class="spinner"></span>
+
+                    Memuat data kunjungan...
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+
+            </table>
+
+          </div>
+
+
+          <div
+            class="pagination"
+            id="pagination"
+          ></div>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           ANALISIS
+      ================================================== -->
+
+      <div
+        class="page-section"
+        id="page-analisis"
+      >
+
+        <div class="section-title">
+
+          <h2>
+            Analisis
+          </h2>
+
+          <p>
+            Modul analisis lanjutan akan dikembangkan setelah Data Kunjungan.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="empty">
+
+            📊
+
+            <br><br>
+
+            Analisis lanjutan sedang dipersiapkan.
+
+            <br>
+
+            Data akan menggunakan database V2.
 
           </div>
 
@@ -1563,97 +2338,44 @@
 
 
       <!-- =================================================
-           KUNJUNGAN TERBARU
+           PENGATURAN
       ================================================== -->
 
-      <div class="card table-card">
+      <div
+        class="page-section"
+        id="page-pengaturan"
+      >
 
+        <div class="section-title">
 
-        <div class="card-header">
+          <h2>
+            Pengaturan
+          </h2>
 
-          <h3>
-            Kunjungan Terbaru
-          </h3>
-
-          <span>
-            10 data terakhir
-          </span>
+          <p>
+            Pengaturan sistem akan dikembangkan pada tahap berikutnya.
+          </p>
 
         </div>
 
 
-        <div class="table-wrapper">
+        <div class="card">
 
+          <div class="empty">
 
-          <table>
+            ⚙️
 
+            <br><br>
 
-            <thead>
+            Modul pengaturan belum diaktifkan.
 
-              <tr>
-
-                <th>
-                  ID Kunjungan
-                </th>
-
-                <th>
-                  Nama
-                </th>
-
-                <th>
-                  Alamat / Instansi
-                </th>
-
-                <th>
-                  Tujuan
-                </th>
-
-                <th>
-                  Petugas
-                </th>
-
-                <th>
-                  Waktu
-                </th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody
-              id="tabelKunjunganTerbaru"
-            >
-
-              <tr>
-
-                <td
-                  colspan="6"
-                  class="loading"
-                >
-
-                  <span class="spinner"></span>
-
-                  Memuat data kunjungan...
-
-                </td>
-
-              </tr>
-
-            </tbody>
-
-
-          </table>
+          </div>
 
         </div>
 
       </div>
 
 
-
-      <!-- =================================================
-           FOOTER
-      ================================================== -->
 
       <div class="footer">
 
@@ -1671,6 +2393,75 @@
 
 
   <!-- =====================================================
+       MODAL DETAIL
+  ====================================================== -->
+
+  <div
+    class="modal-overlay"
+    id="detailModal"
+    onclick="closeModalOutside(event)"
+  >
+
+
+    <div class="modal">
+
+
+      <div class="modal-header">
+
+        <h3>
+          Detail Kunjungan
+        </h3>
+
+        <button
+          class="modal-close"
+          onclick="closeDetail()"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="detail-layout">
+
+
+          <div
+            class="detail-list"
+            id="detailContent"
+          ></div>
+
+
+          <div>
+
+            <div
+              class="photo-box"
+              id="photoBox"
+            >
+
+              <div class="photo-empty">
+
+                Foto tamu
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
        JAVASCRIPT
   ====================================================== -->
 
@@ -1678,33 +2469,24 @@
 
 
     // =====================================================
-    // URL APPS SCRIPT
+    // KONFIGURASI
     // =====================================================
 
     const API_URL =
       "https://script.google.com/macros/s/AKfycbwlxD_30dwLkRp8xxb-H0iANe0t2gd2mzDYfcLlzbt3W4baS8BWSG9G9VjtaiKBfBBV6Q/exec";
 
 
-    // =====================================================
-    // CHART INSTANCE
-    // =====================================================
-
     let trendChart = null;
 
+    let seluruhKunjungan = [];
 
+    let hasilFilter = [];
 
-    // =====================================================
-    // SIDEBAR MOBILE
-    // =====================================================
+    let halamanSekarang = 1;
 
-    function toggleSidebar() {
+    const DATA_PER_HALAMAN = 15;
 
-      document
-        .getElementById("sidebar")
-        .classList
-        .toggle("open");
-
-    }
+    let dataKunjunganSudahDimuat = false;
 
 
 
@@ -1712,10 +2494,10 @@
     // FORMAT ANGKA
     // =====================================================
 
-    function formatAngka(angka) {
+    function formatAngka(value) {
 
       return Number(
-        angka || 0
+        value || 0
       ).toLocaleString(
         "id-ID"
       );
@@ -1725,10 +2507,34 @@
 
 
     // =====================================================
+    // ESCAPE HTML
+    // =====================================================
+
+    function escapeHtml(value) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.textContent =
+        value == null
+          ? ""
+          : String(value);
+
+      return div.innerHTML;
+
+    }
+
+
+
+    // =====================================================
     // FORMAT TANGGAL
     // =====================================================
 
-    function formatTanggal(timestamp) {
+    function formatTanggal(
+      timestamp
+    ) {
 
       if (!timestamp) {
 
@@ -1737,13 +2543,13 @@
       }
 
 
-      const tanggal =
+      const date =
         new Date(timestamp);
 
 
       if (
         isNaN(
-          tanggal.getTime()
+          date.getTime()
         )
       ) {
 
@@ -1752,7 +2558,7 @@
       }
 
 
-      return tanggal.toLocaleString(
+      return date.toLocaleString(
         "id-ID",
         {
 
@@ -1774,24 +2580,226 @@
 
 
     // =====================================================
-    // ESCAPE HTML
+    // FORMAT TANGGAL SAJA
     // =====================================================
 
-    function escapeHtml(value) {
+    function tanggalISO(
+      timestamp
+    ) {
 
-      const div =
-        document.createElement(
-          "div"
+      if (!timestamp) {
+
+        return "";
+
+      }
+
+
+      const date =
+        new Date(timestamp);
+
+
+      if (
+        isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "";
+
+      }
+
+
+      const tahun =
+        date.getFullYear();
+
+
+      const bulan =
+        String(
+          date.getMonth() + 1
+        ).padStart(
+          2,
+          "0"
         );
 
 
-      div.textContent =
-        value == null
-          ? ""
-          : String(value);
+      const hari =
+        String(
+          date.getDate()
+        ).padStart(
+          2,
+          "0"
+        );
 
 
-      return div.innerHTML;
+      return (
+        tahun +
+        "-" +
+        bulan +
+        "-" +
+        hari
+      );
+
+    }
+
+
+
+    // =====================================================
+    // MOBILE SIDEBAR
+    // =====================================================
+
+    function toggleSidebar() {
+
+      document
+        .getElementById(
+          "sidebar"
+        )
+        .classList
+        .toggle(
+          "open"
+        );
+
+    }
+
+
+
+    // =====================================================
+    // NAVIGASI
+    // =====================================================
+
+    document
+      .querySelectorAll(
+        ".menu-item[data-page]"
+      )
+      .forEach(
+        function(button) {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              bukaHalaman(
+                button.dataset.page
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+
+    function bukaHalaman(
+      halaman
+    ) {
+
+
+      document
+        .querySelectorAll(
+          ".page-section"
+        )
+        .forEach(
+          function(section) {
+
+            section.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+      const target =
+        document.getElementById(
+          "page-" + halaman
+        );
+
+
+      if (target) {
+
+        target.classList.add(
+          "active"
+        );
+
+      }
+
+
+      document
+        .querySelectorAll(
+          ".menu-item[data-page]"
+        )
+        .forEach(
+          function(item) {
+
+            item.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+      const activeMenu =
+        document.querySelector(
+          '.menu-item[data-page="' +
+          halaman +
+          '"]'
+        );
+
+
+      if (activeMenu) {
+
+        activeMenu.classList.add(
+          "active"
+        );
+
+      }
+
+
+      const titles = {
+
+        dashboard:
+          "Dashboard Admin",
+
+        kunjungan:
+          "Data Kunjungan",
+
+        analisis:
+          "Analisis",
+
+        pengaturan:
+          "Pengaturan"
+
+      };
+
+
+      document.getElementById(
+        "pageTitle"
+      ).textContent =
+        titles[halaman] ||
+        "Dashboard Admin";
+
+
+      // Tutup sidebar mobile
+      document
+        .getElementById(
+          "sidebar"
+        )
+        .classList
+        .remove(
+          "open"
+        );
+
+
+      // Load data kunjungan
+      if (
+        halaman === "kunjungan" &&
+        !dataKunjunganSudahDimuat
+      ) {
+
+        loadKunjungan();
+
+      }
 
     }
 
@@ -1803,41 +2811,18 @@
 
     async function loadDashboard() {
 
-
-      const statusText =
+      const status =
         document.getElementById(
-          "statusText"
+          "dashboardStatus"
         );
 
 
-      const refreshButton =
-        document.getElementById(
-          "refreshButton"
-        );
+      status.textContent =
+        "Memuat data dashboard...";
 
 
       try {
 
-
-        // -------------------------------------------------
-        // STATUS LOADING
-        // -------------------------------------------------
-
-        statusText.textContent =
-          "Memuat data dashboard...";
-
-
-        refreshButton.disabled =
-          true;
-
-
-        refreshButton.textContent =
-          "⏳ Memuat...";
-
-
-        // -------------------------------------------------
-        // REQUEST KE APPS SCRIPT
-        // -------------------------------------------------
 
         const response =
           await fetch(
@@ -1860,10 +2845,6 @@
           await response.json();
 
 
-        // -------------------------------------------------
-        // VALIDASI
-        // -------------------------------------------------
-
         if (!data.success) {
 
           throw new Error(
@@ -1874,56 +2855,27 @@
         }
 
 
-        // -------------------------------------------------
-        // STATISTIK
-        // -------------------------------------------------
-
         tampilkanStatistik(
           data.statistik
         );
 
 
-        // -------------------------------------------------
-        // GRAFIK
-        // -------------------------------------------------
-
-        tampilkanGrafikTren(
+        tampilkanGrafik(
           data.tren
         );
 
-
-        // -------------------------------------------------
-        // TUJUAN
-        // -------------------------------------------------
 
         tampilkanTujuan(
           data.tujuan
         );
 
 
-        // -------------------------------------------------
-        // PETUGAS
-        // -------------------------------------------------
-
         tampilkanPetugas(
           data.petugas
         );
 
 
-        // -------------------------------------------------
-        // KUNJUNGAN TERBARU
-        // -------------------------------------------------
-
-        tampilkanKunjunganTerbaru(
-          data.kunjunganTerbaru
-        );
-
-
-        // -------------------------------------------------
-        // STATUS SELESAI
-        // -------------------------------------------------
-
-        statusText.textContent =
+        status.textContent =
           "Data berhasil diperbarui • " +
           new Date().toLocaleTimeString(
             "id-ID",
@@ -1938,29 +2890,17 @@
 
 
         console.error(
-          "Dashboard error:",
           error
         );
 
 
-        statusText.textContent =
+        status.textContent =
           "Gagal memuat data dashboard.";
 
-
-        tampilkanError(
+        console.error(
+          "Dashboard:",
           error.message
         );
-
-
-      } finally {
-
-
-        refreshButton.disabled =
-          false;
-
-
-        refreshButton.textContent =
-          "↻ Refresh Data";
 
       }
 
@@ -1969,13 +2909,12 @@
 
 
     // =====================================================
-    // TAMPILKAN STATISTIK
+    // STATISTIK
     // =====================================================
 
     function tampilkanStatistik(
       statistik
     ) {
-
 
       document.getElementById(
         "statHariIni"
@@ -2013,10 +2952,10 @@
 
 
     // =====================================================
-    // GRAFIK TREN
+    // GRAFIK
     // =====================================================
 
-    function tampilkanGrafikTren(
+    function tampilkanGrafik(
       data
     ) {
 
@@ -2034,7 +2973,7 @@
       }
 
 
-      const namaBulan = [
+      const labels = [
 
         "Jan",
         "Feb",
@@ -2053,7 +2992,7 @@
 
 
       const values =
-        data.map(
+        (data || []).map(
           function(item) {
 
             return Number(
@@ -2064,13 +3003,6 @@
         );
 
 
-      const ctx =
-        canvas.getContext(
-          "2d"
-        );
-
-
-      // Hapus grafik lama
       if (trendChart) {
 
         trendChart.destroy();
@@ -2080,17 +3012,14 @@
 
       trendChart =
         new Chart(
-          ctx,
+          canvas.getContext("2d"),
           {
 
             type: "line",
 
-
             data: {
 
-              labels:
-                namaBulan,
-
+              labels: labels,
 
               datasets: [
 
@@ -2118,10 +3047,7 @@
                     0.35,
 
                   pointRadius:
-                    3,
-
-                  pointHoverRadius:
-                    5
+                    3
 
                 }
 
@@ -2187,27 +3113,18 @@
         );
 
 
-
-      // ---------------------------------------------------
-      // TAHUN GRAFIK
-      // ---------------------------------------------------
-
-      const tahun =
-        new Date()
-          .getFullYear();
-
-
       document.getElementById(
         "tahunGrafik"
       ).textContent =
-        "Tahun " + tahun;
+        "Tahun " +
+        new Date().getFullYear();
 
     }
 
 
 
     // =====================================================
-    // TAMPILKAN TUJUAN
+    // TUJUAN
     // =====================================================
 
     function tampilkanTujuan(
@@ -2221,13 +3138,6 @@
         );
 
 
-      if (!container) {
-
-        return;
-
-      }
-
-
       container.innerHTML =
         "";
 
@@ -2237,17 +3147,8 @@
         data.length === 0
       ) {
 
-
-        container.innerHTML = `
-
-          <div class="empty-message">
-
-            Belum ada data kunjungan.
-
-          </div>
-
-        `;
-
+        container.innerHTML =
+          '<div class="empty">Belum ada data.</div>';
 
         return;
 
@@ -2261,7 +3162,7 @@
         );
 
 
-      const nilaiMaksimum =
+      const maksimum =
         Math.max.apply(
           null,
 
@@ -2288,13 +3189,11 @@
 
 
           const persen =
-            nilaiMaksimum > 0
-
+            maksimum > 0
               ? (
                   jumlah /
-                  nilaiMaksimum
+                  maksimum
                 ) * 100
-
               : 0;
 
 
@@ -2317,22 +3216,18 @@
               ${escapeHtml(item.nama)}
             </div>
 
-            <div
-              class="service-progress"
-            >
+            <div class="service-progress">
 
               <div
-                style="
-                  width:${persen}%;
-                "
+                style="width:${persen}%"
               ></div>
 
             </div>
 
-            <div
-              class="service-value"
-            >
+            <div class="service-value">
+
               ${formatAngka(jumlah)}
+
             </div>
 
           `;
@@ -2350,7 +3245,7 @@
 
 
     // =====================================================
-    // TAMPILKAN PETUGAS
+    // PETUGAS
     // =====================================================
 
     function tampilkanPetugas(
@@ -2364,13 +3259,6 @@
         );
 
 
-      if (!container) {
-
-        return;
-
-      }
-
-
       container.innerHTML =
         "";
 
@@ -2380,102 +3268,593 @@
         data.length === 0
       ) {
 
-
-        container.innerHTML = `
-
-          <div class="empty-message">
-
-            Belum ada data petugas.
-
-          </div>
-
-        `;
-
+        container.innerHTML =
+          '<div class="empty">Belum ada data.</div>';
 
         return;
 
       }
 
 
-      const daftar =
-        data.slice(
-          0,
-          10
-        );
+      data
+        .slice(0, 10)
+        .forEach(
+          function(item) {
 
 
-      daftar.forEach(
-        function(item) {
+            const div =
+              document.createElement(
+                "div"
+              );
 
 
-          const div =
-            document.createElement(
-              "div"
+            div.className =
+              "petugas-item";
+
+
+            div.innerHTML = `
+
+              <div class="petugas-name">
+
+                👤
+                ${escapeHtml(item.nama)}
+
+              </div>
+
+              <div class="petugas-count">
+
+                ${formatAngka(item.jumlah)}
+                kunjungan
+
+              </div>
+
+            `;
+
+
+            container.appendChild(
+              div
             );
 
-
-          div.className =
-            "petugas-item";
-
-
-          div.innerHTML = `
-
-            <div class="petugas-name">
-
-              👤
-              ${escapeHtml(item.nama)}
-
-            </div>
-
-            <div class="petugas-count">
-
-              ${formatAngka(item.jumlah)}
-              kunjungan
-
-            </div>
-
-          `;
-
-
-          container.appendChild(
-            div
-          );
-
-        }
-      );
+          }
+        );
 
     }
 
 
 
     // =====================================================
-    // TAMPILKAN KUNJUNGAN TERBARU
+    // LOAD DATA KUNJUNGAN
     // =====================================================
 
-    function tampilkanKunjunganTerbaru(
-      data
+    async function loadKunjungan(
+      forceRefresh = false
     ) {
 
 
       const tbody =
         document.getElementById(
-          "tabelKunjunganTerbaru"
+          "tabelKunjungan"
         );
 
 
-      if (!tbody) {
+      tbody.innerHTML = `
 
-        return;
+        <tr>
+
+          <td
+            colspan="8"
+            class="loading"
+          >
+
+            <span class="spinner"></span>
+
+            Memuat  data kunjungan...
+
+          </td>
+
+        </tr>
+
+      `;
+
+
+      try {
+
+
+        const response =
+          await fetch(
+            API_URL +
+            "?action=kunjungan" +
+            "&t=" +
+            Date.now()
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Server mengembalikan status " +
+            response.status
+          );
+
+        }
+
+
+        const result =
+          await response.json();
+
+
+        if (!result.success) {
+
+          throw new Error(
+            result.message ||
+            "Data kunjungan gagal dimuat."
+          );
+
+        }
+
+
+        seluruhKunjungan =
+          Array.isArray(result.data)
+            ? result.data
+            : [];
+
+
+        dataKunjunganSudahDimuat =
+          true;
+
+
+        isiFilter();
+
+
+        hasilFilter =
+          [...seluruhKunjungan];
+
+
+        halamanSekarang =
+          1;
+
+
+        tampilkanTabel();
+
+
+      } catch (error) {
+
+
+        console.error(
+          "Data kunjungan:",
+          error
+        );
+
+
+        tbody.innerHTML = `
+
+          <tr>
+
+            <td
+              colspan="8"
+              class="empty"
+            >
+
+              ⚠️ Gagal memuat data kunjungan.
+
+              <br><br>
+
+              ${escapeHtml(error.message)}
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+
+    }
+
+
+
+    // =====================================================
+    // ISI FILTER
+    // =====================================================
+
+    function isiFilter() {
+
+
+      const tujuan =
+        document.getElementById(
+          "filterTujuan"
+        );
+
+
+      const petugas =
+        document.getElementById(
+          "filterPetugas"
+        );
+
+
+      const tujuanLama =
+        tujuan.value;
+
+
+      const petugasLama =
+        petugas.value;
+
+
+      const daftarTujuan =
+        [
+          ...new Set(
+            seluruhKunjungan
+              .map(
+                item =>
+                  item.tujuan
+              )
+              .filter(Boolean)
+          )
+        ]
+        .sort();
+
+
+      const daftarPetugas =
+        [
+          ...new Set(
+            seluruhKunjungan
+              .map(
+                item =>
+                  item.petugas
+              )
+              .filter(Boolean)
+          )
+        ]
+        .sort();
+
+
+      tujuan.innerHTML =
+        '<option value="">Semua Tujuan</option>';
+
+
+      daftarTujuan.forEach(
+        function(nama) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            nama;
+
+          option.textContent =
+            nama;
+
+          tujuan.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      petugas.innerHTML =
+        '<option value="">Semua Petugas</option>';
+
+
+      daftarPetugas.forEach(
+        function(nama) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            nama;
+
+          option.textContent =
+            nama;
+
+          petugas.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      tujuan.value =
+        tujuanLama;
+
+      petugas.value =
+        petugasLama;
+
+    }
+
+
+
+    // =====================================================
+    // TERAPKAN FILTER
+    // =====================================================
+
+    function terapkanFilter() {
+
+
+      const search =
+        document.getElementById(
+          "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+      const tujuan =
+        document.getElementById(
+          "filterTujuan"
+        ).value;
+
+
+      const petugas =
+        document.getElementById(
+          "filterPetugas"
+        ).value;
+
+
+      const dari =
+        document.getElementById(
+          "filterDari"
+        ).value;
+
+
+      const sampai =
+        document.getElementById(
+          "filterSampai"
+        ).value;
+
+
+      hasilFilter =
+        seluruhKunjungan.filter(
+          function(item) {
+
+
+            // ---------------------------------------------
+            // SEARCH
+            // ---------------------------------------------
+
+            const teks =
+              (
+
+                String(
+                  item.id || ""
+                ) +
+
+                " " +
+
+                String(
+                  item.nama || ""
+                ) +
+
+                " " +
+
+                String(
+                  item.alamat || ""
+                ) +
+
+                " " +
+
+                String(
+                  item.noHp || ""
+                ) +
+
+                " " +
+
+                String(
+                  item.tujuan || ""
+                ) +
+
+                " " +
+
+                String(
+                  item.detail || ""
+                ) +
+
+                " " +
+
+                String(
+                  item.petugas || ""
+                )
+
+              )
+              .toLowerCase();
+
+
+            if (
+              search &&
+              !teks.includes(search)
+            ) {
+
+              return false;
+
+            }
+
+
+            // ---------------------------------------------
+            // TUJUAN
+            // ---------------------------------------------
+
+            if (
+              tujuan &&
+              item.tujuan !== tujuan
+            ) {
+
+              return false;
+
+            }
+
+
+            // ---------------------------------------------
+            // PETUGAS
+            // ---------------------------------------------
+
+            if (
+              petugas &&
+              item.petugas !== petugas
+            ) {
+
+              return false;
+
+            }
+
+
+            // ---------------------------------------------
+            // TANGGAL
+            // ---------------------------------------------
+
+            const tanggal =
+              tanggalISO(
+                item.timestamp
+              );
+
+
+            if (
+              dari &&
+              tanggal < dari
+            ) {
+
+              return false;
+
+            }
+
+
+            if (
+              sampai &&
+              tanggal > sampai
+            ) {
+
+              return false;
+
+            }
+
+
+            return true;
+
+          }
+        );
+
+
+      halamanSekarang =
+        1;
+
+
+      tampilkanTabel();
+
+    }
+
+
+
+    // =====================================================
+    // RESET FILTER
+    // =====================================================
+
+    function resetFilter() {
+
+
+      document.getElementById(
+        "searchInput"
+      ).value = "";
+
+
+      document.getElementById(
+        "filterTujuan"
+      ).value = "";
+
+
+      document.getElementById(
+        "filterPetugas"
+      ).value = "";
+
+
+      document.getElementById(
+        "filterDari"
+      ).value = "";
+
+
+      document.getElementById(
+        "filterSampai"
+      ).value = "";
+
+
+      hasilFilter =
+        [...seluruhKunjungan];
+
+
+      halamanSekarang =
+        1;
+
+
+      tampilkanTabel();
+
+    }
+
+
+
+    // =====================================================
+    // TABEL
+    // =====================================================
+
+    function tampilkanTabel() {
+
+
+      const tbody =
+        document.getElementById(
+          "tabelKunjungan"
+        );
+
+
+      const total =
+        hasilFilter.length;
+
+
+      const totalHalaman =
+        Math.max(
+          1,
+
+          Math.ceil(
+            total /
+            DATA_PER_HALAMAN
+          )
+        );
+
+
+      if (
+        halamanSekarang >
+        totalHalaman
+      ) {
+
+        halamanSekarang =
+          totalHalaman;
 
       }
 
 
-      tbody.innerHTML =
-        "";
+      const mulai =
+        (
+          halamanSekarang - 1
+        ) *
+        DATA_PER_HALAMAN;
+
+
+      const akhir =
+        mulai +
+        DATA_PER_HALAMAN;
+
+
+      const data =
+        hasilFilter.slice(
+          mulai,
+          akhir
+        );
 
 
       if (
-        !data ||
         data.length === 0
       ) {
 
@@ -2485,11 +3864,11 @@
           <tr>
 
             <td
-              colspan="6"
-              class="loading"
+              colspan="8"
+              class="empty"
             >
 
-              Belum ada data kunjungan.
+              Tidak ada data yang sesuai dengan filter.
 
             </td>
 
@@ -2497,79 +3876,337 @@
 
         `;
 
+
+      } else {
+
+
+        tbody.innerHTML =
+          "";
+
+
+        data.forEach(
+          function(item) {
+
+
+            const tr =
+              document.createElement(
+                "tr"
+              );
+
+
+            const id =
+              item.id ||
+              "-";
+
+
+            const nama =
+              item.nama ||
+              "-";
+
+
+            const alamat =
+              item.alamat ||
+              "-";
+
+
+            const noHp =
+              item.noHp ||
+              "-";
+
+
+            const tujuan =
+              item.tujuan ||
+              "-";
+
+
+            const petugas =
+              item.petugas ||
+              "-";
+
+
+            tr.innerHTML = `
+
+              <td class="id">
+
+                ${escapeHtml(id)}
+
+              </td>
+
+
+              <td>
+
+                ${formatTanggal(
+                  item.timestamp
+                )}
+
+              </td>
+
+
+              <td>
+
+                ${escapeHtml(nama)}
+
+              </td>
+
+
+              <td>
+
+                ${escapeHtml(alamat)}
+
+              </td>
+
+
+              <td>
+
+                ${escapeHtml(noHp)}
+
+              </td>
+
+
+              <td>
+
+                <span class="badge">
+
+                  ${escapeHtml(tujuan)}
+
+                </span>
+
+              </td>
+
+
+              <td>
+
+                ${escapeHtml(petugas)}
+
+              </td>
+
+
+              <td>
+
+                <button
+                  class="btn-detail"
+                  onclick="lihatDetail(${mulai + data.indexOf(item)})"
+                  title="Lihat detail"
+                >
+                  👁️
+                </button>
+
+              </td>
+
+            `;
+
+
+            tbody.appendChild(
+              tr
+            );
+
+          }
+        );
+
+      }
+
+
+      // ---------------------------------------------------
+      // INFO
+      // ---------------------------------------------------
+
+      const dariNomor =
+        total === 0
+          ? 0
+          : mulai + 1;
+
+
+      const sampaiNomor =
+        Math.min(
+          akhir,
+          total
+        );
+
+
+      document.getElementById(
+        "resultInfo"
+      ).textContent =
+
+        "Menampilkan " +
+        dariNomor +
+        "–" +
+        sampaiNomor +
+        " dari " +
+        formatAngka(total) +
+        " data";
+
+
+      tampilkanPagination(
+        totalHalaman
+      );
+
+    }
+
+
+
+    // =====================================================
+    // PAGINATION
+    // =====================================================
+
+    function tampilkanPagination(
+      totalHalaman
+    ) {
+
+
+      const container =
+        document.getElementById(
+          "pagination"
+        );
+
+
+      container.innerHTML =
+        "";
+
+
+      if (
+        totalHalaman <= 1
+      ) {
 
         return;
 
       }
 
 
-      data.forEach(
-        function(item) {
+      const prev =
+        document.createElement(
+          "button"
+        );
 
 
-          const tr =
-            document.createElement(
-              "tr"
-            );
+      prev.className =
+        "page-btn";
 
 
-          tr.innerHTML = `
-
-            <td class="id">
-
-              ${escapeHtml(item.id)}
-
-            </td>
+      prev.textContent =
+        "‹";
 
 
-            <td>
-
-              ${escapeHtml(item.nama)}
-
-            </td>
+      prev.disabled =
+        halamanSekarang === 1;
 
 
-            <td>
+      prev.onclick =
+        function() {
 
-              ${escapeHtml(item.alamat)}
+          if (
+            halamanSekarang > 1
+          ) {
 
-            </td>
+            halamanSekarang--;
 
+            tampilkanTabel();
 
-            <td>
+          }
 
-              <span class="badge">
-
-                ${escapeHtml(item.tujuan)}
-
-              </span>
-
-            </td>
+        };
 
 
-            <td>
-
-              ${escapeHtml(item.petugas)}
-
-            </td>
+      container.appendChild(
+        prev
+      );
 
 
-            <td>
-
-              ${formatTanggal(
-                item.timestamp
-              )}
-
-            </td>
-
-          `;
+      let mulai =
+        Math.max(
+          1,
+          halamanSekarang - 2
+        );
 
 
-          tbody.appendChild(
-            tr
+      let akhir =
+        Math.min(
+          totalHalaman,
+          halamanSekarang + 2
+        );
+
+
+      for (
+        let i = mulai;
+        i <= akhir;
+        i++
+      ) {
+
+
+        const button =
+          document.createElement(
+            "button"
           );
 
-        }
+
+        button.className =
+          "page-btn" +
+          (
+            i === halamanSekarang
+              ? " active"
+              : ""
+          );
+
+
+        button.textContent =
+          i;
+
+
+        button.onclick =
+          function() {
+
+            halamanSekarang =
+              i;
+
+            tampilkanTabel();
+
+          };
+
+
+        container.appendChild(
+          button
+        );
+
+      }
+
+
+      const next =
+        document.createElement(
+          "button"
+        );
+
+
+      next.className =
+        "page-btn";
+
+
+      next.textContent =
+        "›";
+
+
+      next.disabled =
+        halamanSekarang ===
+        totalHalaman;
+
+
+      next.onclick =
+        function() {
+
+          if (
+            halamanSekarang <
+            totalHalaman
+          ) {
+
+            halamanSekarang++;
+
+            tampilkanTabel();
+
+          }
+
+        };
+
+
+      container.appendChild(
+        next
       );
 
     }
@@ -2577,86 +4214,297 @@
 
 
     // =====================================================
-    // TAMPILKAN ERROR
+    // DETAIL KUNJUNGAN
     // =====================================================
 
-    function tampilkanError(
-      pesan
+    function lihatDetail(
+      index
     ) {
 
 
-      const serviceList =
+      const item =
+        hasilFilter[index];
+
+
+      if (!item) {
+
+        return;
+
+      }
+
+
+      const detail =
         document.getElementById(
-          "serviceList"
+          "detailContent"
         );
 
 
-      const petugasList =
+      detail.innerHTML = `
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            ID Kunjungan
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.id || "-"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Waktu
+          </div>
+
+          <div class="detail-value">
+            ${formatTanggal(
+              item.timestamp
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Nama
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.nama || "-"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Alamat / Instansi
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.alamat || "-"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            No. HP
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.noHp || "-"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Tujuan
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.tujuan || "-"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Detail Keperluan
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.detail || "-"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <div class="detail-label">
+            Petugas
+          </div>
+
+          <div class="detail-value">
+            ${escapeHtml(
+              item.petugas || "-"
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      tampilkanFoto(
+        item.fotoUrl
+      );
+
+
+      document
+        .getElementById(
+          "detailModal"
+        )
+        .classList
+        .add(
+          "show"
+        );
+
+    }
+
+
+
+    // =====================================================
+    // FOTO
+    // =====================================================
+
+    function tampilkanFoto(
+      url
+    ) {
+
+
+      const box =
         document.getElementById(
-          "petugasList"
+          "photoBox"
         );
 
 
-      const tabel =
-        document.getElementById(
-          "tabelKunjunganTerbaru"
-        );
+      box.innerHTML =
+        "";
 
 
-      if (serviceList) {
+      if (!url) {
 
-        serviceList.innerHTML = `
+        box.innerHTML = `
 
-          <div class="empty-message">
+          <div class="photo-empty">
 
-            ⚠️ Data gagal dimuat.
+            📷
+
+            <br><br>
+
+            Foto tamu tidak tersedia.
 
           </div>
 
         `;
 
-      }
-
-
-      if (petugasList) {
-
-        petugasList.innerHTML = `
-
-          <div class="empty-message">
-
-            ⚠️ Data gagal dimuat.
-
-          </div>
-
-        `;
+        return;
 
       }
 
 
-      if (tabel) {
-
-        tabel.innerHTML = `
-
-          <tr>
-
-            <td
-              colspan="6"
-              class="loading"
-            >
-
-              ⚠️ Data gagal dimuat.
-
-            </td>
-
-          </tr>
-
-        `;
-
-      }
+      const imageUrl =
+        ubahKeThumbnailDrive(
+          url
+        );
 
 
-      console.error(
-        pesan
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      img.src =
+        imageUrl;
+
+
+      img.alt =
+        "Foto Tamu";
+
+
+      img.onerror =
+        function() {
+
+          box.innerHTML = `
+
+            <div class="photo-empty">
+
+              📷
+
+              <br><br>
+
+              Foto tidak dapat ditampilkan langsung.
+
+              <br>
+
+              <a
+                class="photo-link"
+                href="${escapeHtml(url)}"
+                target="_blank"
+                rel="noopener"
+              >
+                🔗 Buka Foto di Google Drive
+              </a>
+
+            </div>
+
+          `;
+
+        };
+
+
+      box.appendChild(
+        img
+      );
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.href =
+        url;
+
+
+      link.target =
+        "_blank";
+
+
+      link.rel =
+        "noopener";
+
+
+      link.className =
+        "photo-link";
+
+
+      link.textContent =
+        "🔗 Buka Foto di Google Drive";
+
+
+      box.appendChild(
+        link
       );
 
     }
@@ -2664,7 +4512,142 @@
 
 
     // =====================================================
-    // JALANKAN SAAT HALAMAN DIBUKA
+    // KONVERSI URL DRIVE KE THUMBNAIL
+    // =====================================================
+
+    function ubahKeThumbnailDrive(
+      url
+    ) {
+
+
+      if (!url) {
+
+        return "";
+
+      }
+
+
+      let match =
+        url.match(
+          /\/file\/d\/([^/]+)/
+        );
+
+
+      if (!match) {
+
+        match =
+          url.match(
+            /[?&]id=([^&]+)/
+          );
+
+      }
+
+
+      if (match) {
+
+        const fileId =
+          match[1];
+
+
+        return (
+          "https://drive.google.com/thumbnail?id=" +
+          encodeURIComponent(fileId) +
+          "&sz=w800"
+        );
+
+      }
+
+
+      return url;
+
+    }
+
+
+
+    // =====================================================
+    // CLOSE DETAIL
+    // =====================================================
+
+    function closeDetail() {
+
+      document
+        .getElementById(
+          "detailModal"
+        )
+        .classList
+        .remove(
+          "show"
+        );
+
+    }
+
+
+
+    function closeModalOutside(
+      event
+    ) {
+
+      if (
+        event.target.id ===
+        "detailModal"
+      ) {
+
+        closeDetail();
+
+      }
+
+    }
+
+
+
+    // =====================================================
+    // KEYBOARD
+    // =====================================================
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+
+          closeDetail();
+
+        }
+
+      }
+    );
+
+
+
+    // =====================================================
+    // SEARCH ENTER
+    // =====================================================
+
+    document.getElementById(
+      "searchInput"
+    ).addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key ===
+          "Enter"
+        ) {
+
+          terapkanFilter();
+
+        }
+
+      }
+    );
+
+
+
+    // =====================================================
+    // LOAD AWAL
     // =====================================================
 
     document.addEventListener(
@@ -2675,7 +4658,6 @@
 
       }
     );
-
 
   </script>
 
