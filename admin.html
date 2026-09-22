@@ -4931,13 +4931,13 @@
 
 
     const namaHariAnalisis = [
-      "Minggu",
       "Senin",
       "Selasa",
       "Rabu",
       "Kamis",
       "Jumat",
-      "Sabtu"
+      "Sabtu",
+      "Minggu"
     ];
 
 
@@ -5256,7 +5256,19 @@
         null;
 
 
+      const hariDariData =
+        Array.isArray(data.hari)
+          ? data.hari
+              .slice()
+              .sort(function(a, b) {
+                return Number(b.jumlah || 0) -
+                       Number(a.jumlah || 0);
+              })[0] || null
+          : null;
+
+
       const hari =
+        hariDariData ||
         ringkasan.hariTerbanyak ||
         null;
 
@@ -5751,27 +5763,45 @@
       }
 
 
+      // Pastikan urutan hari selalu Senin–Minggu,
+      // terlepas dari urutan data yang dikirim API.
+      const dataTerurut =
+        namaHariAnalisis.map(
+          function(namaHari) {
+
+            const item =
+              data.find(
+                function(row) {
+                  return row.nama === namaHari;
+                }
+              );
+
+            return {
+              nama: namaHari,
+              jumlah: item
+                ? Number(item.jumlah || 0)
+                : 0
+            };
+
+          }
+        );
+
+
       const labels =
-        data.map(
+        dataTerurut.map(
           function(item) {
 
-            return (
-              item.nama ||
-              "-"
-            );
+            return item.nama;
 
           }
         );
 
 
       const values =
-        data.map(
+        dataTerurut.map(
           function(item) {
 
-            return Number(
-              item.jumlah ||
-              0
-            );
+            return item.jumlah;
 
           }
         );
