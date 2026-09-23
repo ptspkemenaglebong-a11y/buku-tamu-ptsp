@@ -1211,6 +1211,9 @@
                 <button type="button" class="camera-action" onclick="ambilFotoWebcam()">
                   📸 Jepret Foto
                 </button>
+                <button type="button" class="camera-action" onclick="gantiKamera()">
+                  🔄 Ganti Kamera
+                </button>
                 <button type="button" class="camera-action camera-cancel" onclick="tutupKameraWebcam()">
                   ✕ Tutup Kamera
                 </button>
@@ -1625,6 +1628,12 @@
 
     let fotoBase64 = "";
     let cameraStream = null;
+
+    // Kamera depan / belakang
+    // user = kamera depan
+    // environment = kamera belakang
+    let cameraFacingMode = "user";
+
     let statusBukuTamu = "BUKA";
 
 
@@ -1952,7 +1961,7 @@
           video: {
             width: { ideal: 1280 },
             height: { ideal: 720 },
-            facingMode: "user"
+            facingMode: { ideal: cameraFacingMode }
           },
           audio: false
         });
@@ -1984,6 +1993,38 @@
         alert(pesan);
         cameraStream = null;
       }
+    }
+
+
+    // =====================================================
+    // GANTI KAMERA DEPAN / BELAKANG
+    // =====================================================
+
+    async function gantiKamera() {
+
+      if (!cameraStream) {
+        alert("Kamera belum aktif.");
+        return;
+      }
+
+      const modeSebelumnya = cameraFacingMode;
+
+      // user = kamera depan, environment = kamera belakang
+      cameraFacingMode =
+        cameraFacingMode === "environment"
+          ? "user"
+          : "environment";
+
+      try {
+
+        await bukaKamera();
+
+      } catch (error) {
+
+        cameraFacingMode = modeSebelumnya;
+
+      }
+
     }
 
 
@@ -2071,6 +2112,7 @@
 
     function ambilUlangFoto() {
       fotoBase64 = "";
+      cameraFacingMode = "user";
       tutupKameraWebcam();
       document.getElementById("photoPreview").removeAttribute("src");
       document.getElementById("photoContainer").style.display = "none";
