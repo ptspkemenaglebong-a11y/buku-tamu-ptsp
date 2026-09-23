@@ -1625,12 +1625,32 @@
 
     }
 
-  </style>
+  
+/* LOGIN ADMIN */
+#loginOverlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#eef7f1,#f7faf8)}
+.login-card{width:100%;max-width:420px;background:#fff;border-radius:20px;padding:34px;box-shadow:0 20px 60px rgba(18,55,42,.14);border:1px solid #e2ece6}
+.login-logo{width:72px;height:72px;object-fit:contain;display:block;margin:0 auto 18px}
+.login-card h2{text-align:center;color:#12372a;margin-bottom:6px}.login-subtitle{text-align:center;color:#7b8981;font-size:13px;line-height:1.6;margin-bottom:26px}.login-field{margin-bottom:16px}.login-field label{display:block;margin-bottom:7px;color:#33443b;font-size:13px;font-weight:600}.login-field input{width:100%;padding:12px 14px;border:1px solid #d8e3dc;border-radius:10px;outline:none;font-size:14px;background:#fbfdfc}.login-field input:focus{border-color:#087443;box-shadow:0 0 0 3px rgba(8,116,67,.08)}.login-button{width:100%;border:0;border-radius:10px;padding:13px;background:#087443;color:white;font-weight:700;cursor:pointer;font-size:14px;margin-top:4px}.login-button:disabled{opacity:.65;cursor:wait}.login-error{min-height:20px;margin-top:12px;text-align:center;color:#b42318;font-size:12px}.logout-button{border:0;background:transparent;color:#b42318;cursor:pointer;font-size:12px;margin-left:8px}
+</style>
 
 </head>
 
 
 <body>
+
+  <div id="loginOverlay">
+    <div class="login-card">
+      <img class="login-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Kementerian_Agama_new_logo.png" alt="Logo Kementerian Agama">
+      <h2>Login Admin</h2>
+      <p class="login-subtitle">Dashboard Admin Buku Tamu Digital PTSP<br>Kementerian Agama Kabupaten Lebong</p>
+      <form id="loginForm" onsubmit="loginAdmin(event)">
+        <div class="login-field"><label for="loginUsername">Username</label><input id="loginUsername" type="text" autocomplete="username" placeholder="Masukkan username" required></div>
+        <div class="login-field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Masukkan password" required></div>
+        <button id="loginButton" class="login-button" type="submit">🔐 Masuk ke Dashboard</button>
+        <div id="loginError" class="login-error"></div>
+      </form>
+    </div>
+  </div>
 
 
   <!-- =====================================================
@@ -1800,9 +1820,11 @@
 
       <div class="admin-info">
 
-        <span>
+        <span id="loggedInUser">
           Administrator
         </span>
+
+        <button type="button" class="logout-button" onclick="logoutAdmin()">Keluar</button>
 
         <div class="admin-avatar">
           👤
@@ -2912,6 +2934,48 @@
     const API_URL =
       "https://script.google.com/macros/s/AKfycbwlxD_30dwLkRp8xxb-H0iANe0t2gd2mzDYfcLlzbt3W4baS8BWSG9G9VjtaiKBfBBV6Q/exec";
 
+    const ADMIN_TOKEN_KEY = "ptsp_admin_token";
+    const ADMIN_USER_KEY = "ptsp_admin_user";
+
+    function getAdminToken(){ return localStorage.getItem(ADMIN_TOKEN_KEY) || ""; }
+    function adminApiUrl(url){ return url + (url.includes("?") ? "&" : "?") + "token=" + encodeURIComponent(getAdminToken()); }
+    function showLogin(){ const el=document.getElementById("loginOverlay"); if(el) el.style.display="flex"; }
+    function hideLogin(){ const el=document.getElementById("loginOverlay"); if(el) el.style.display="none"; }
+
+    async function loginAdmin(event){
+      event.preventDefault();
+      const username=document.getElementById("loginUsername").value.trim();
+      const password=document.getElementById("loginPassword").value;
+      const button=document.getElementById("loginButton");
+      const error=document.getElementById("loginError");
+      error.textContent=""; button.disabled=true; button.textContent="Memeriksa...";
+      try{
+        const response=await fetch(API_URL+"?action=login&username="+encodeURIComponent(username)+"&password="+encodeURIComponent(password)+"&t="+Date.now());
+        const data=await response.json();
+        if(!data.success) throw new Error(data.message || "Login gagal.");
+        localStorage.setItem(ADMIN_TOKEN_KEY,data.token);
+        localStorage.setItem(ADMIN_USER_KEY,data.username || username);
+        document.getElementById("loggedInUser").textContent=data.username || username;
+        hideLogin(); document.getElementById("loginPassword").value=""; loadDashboard();
+      }catch(err){ error.textContent=err.message || "Username atau password salah."; }
+      finally{ button.disabled=false; button.textContent="🔐 Masuk ke Dashboard"; }
+    }
+
+    function logoutAdmin(){ localStorage.removeItem(ADMIN_TOKEN_KEY); localStorage.removeItem(ADMIN_USER_KEY); location.reload(); }
+
+    async function initAdminAuth(){
+      const token=getAdminToken();
+      if(!token){ showLogin(); return; }
+      try{
+        const response=await fetch(adminApiUrl(API_URL+"?action=dashboard"));
+        const data=await response.json();
+        if(!response.ok || !data.success) throw new Error("SESSION_EXPIRED");
+        document.getElementById("loggedInUser").textContent=localStorage.getItem(ADMIN_USER_KEY)||"Administrator";
+        hideLogin();
+        loadDashboard();
+      }catch(err){ localStorage.removeItem(ADMIN_TOKEN_KEY); localStorage.removeItem(ADMIN_USER_KEY); showLogin(); }
+    }
+
 
     let trendChart = null;
 
@@ -3263,8 +3327,8 @@
 
         const response =
           await fetch(
-            API_URL +
-            "?action=dashboard"
+            adminApiUrl(API_URL +
+            "?action=dashboard")
           );
 
 
@@ -3799,10 +3863,10 @@
 
         const response =
           await fetch(
-            API_URL +
+            adminApiUrl(API_URL +
             "?action=kunjungan" +
             "&t=" +
-            Date.now()
+            Date.now())
           );
 
 
@@ -5220,7 +5284,7 @@
 
         const response =
           await fetch(
-            url
+            adminApiUrl(url)
           );
 
 
@@ -6428,7 +6492,7 @@
           Date.now();
 
         const response =
-          await fetch(url);
+          await fetch(adminApiUrl(url));
 
         if (!response.ok) {
           throw new Error(
@@ -6581,7 +6645,7 @@
       "DOMContentLoaded",
       function() {
 
-        loadDashboard();
+        initAdminAuth();
 
       }
     );
